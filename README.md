@@ -1,4 +1,4 @@
-# TENT Core
+# TENT Core 1.1.6
 
 ### Install dependencies
 
