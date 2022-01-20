@@ -1,0 +1,157 @@
+<div class="page-content container-fluid">
+  <!-- Panel Wallet Address -->
+  <div class="panel">
+    <div class="panel-body">
+
+      <!-- Modal Alert-->
+      <div class="modal fade" id="modalSendAlert" data-backdrop="static" aria-hidden="true" aria-labelledby="modalSendAlert"
+      role="dialog" tabindex="-1">
+        <div class="modal-dialog modal-simple modal-center">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+              <h4 class="modal-title">{{detail.title}}</h4>
+            </div>
+            <div class="modal-body">
+              <p>{{detail.text}}</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">{{'global.close' | translate}}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Modal -->
+
+      <!-- Modal Alert-->
+      <div class="modal fade" id="modalSendConfirmation" data-backdrop="static" aria-hidden="true" aria-labelledby="modalSendConfirm"
+      role="dialog" tabindex="-1">
+        <div class="modal-dialog modal-simple modal-center">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+              <h4 class="modal-title">{{detail.title}}</h4>
+            </div>
+            <div class="modal-body">
+              <p>{{detail.text}}</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="sendCoin()">{{'sendView.send' | translate}}</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">{{'global.close' | translate}}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Modal -->
+
+      <!-- Modal Alert-->
+      <div class="modal fade" id="modalSendMany" data-backdrop="static" aria-hidden="true" role="dialog" tabindex="-1">
+        <div class="modal-dialog modal-simple modal-center">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+              <h4 class="modal-title">{{detail.title}}</h4>
+            </div>
+            <div class="modal-body">
+              <textarea class="form-control font-size-12" rows="15" ng-model="detail.sendManyData"></textarea>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="sendCoin()">{{'sendView.send' | translate}}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Modal -->
+
+      <div class="row row-lg">
+        <div class="col-md-12">
+          <form autocomplete="off">
+            <div class="form-row">
+              <div class="form-group col-md-5">
+                <label class="form-control-label" for="inputBasicFirstName">{{'sendView.fromAddress' | translate}}</label>
+                <!--for enabling private address-->
+                <select class="form-control" data-plugin="select2" title="{{detail.selected}}" ng-model="detail.selected" ng-click="selectAddress(detail.selected)" ng-disabled="detail.btnDisable" ng-show="detail.showPrivateAddress">
+                  <optgroup label="Normal address">
+                    <option ng-repeat="publicAddress in publicAddresses" value="{{publicAddress.value}}">
+                      {{ publicAddress.text }}
+                    </option>
+                  </optgroup>
+                  <optgroup label="Private address">
+                    <option ng-repeat="privateAddress in privateAddresses" value="{{privateAddress.value}}">
+                      {{ privateAddress.text }}
+                    </option>
+                  </optgroup>
+                </select>
+                <!--for disabling private address-->
+                <select class="form-control" data-plugin="select2" title="{{detail.selected}}" ng-model="detail.selected" ng-click="selectAddress(detail.selected)" ng-disabled="detail.btnDisable" ng-show="!detail.showPrivateAddress">
+                  <option value="public">
+                    {{'sendView.publicAddresses' | translate}}
+                  </option>
+                  <option ng-repeat="publicAddress in publicAddresses" value="{{publicAddress.value}}">
+                    {{ publicAddress.text }}
+                  </option>
+                </select>
+              </div>
+              <div class="form-group col-md-5">
+                <label class="form-control-label" for="inputBasicLastName">{{'sendView.recipientAddress' | translate}}</label>
+                <input type="text" class="form-control" id="inputBasicLastName" name="inputLastName"
+                  placeholder="{{'sendView.placeholder.recipientAddress' | translate}}" autocomplete="off" ng-model="detail.recipientAddress" ng-change="recipientAddressChange(detail.recipientAddress)" ng-disabled="detail.btnDisable"/>
+              </div>
+              <div class="form-group col-md-2">
+                <label class="form-control-label">{{'sendView.addressBook' | translate}}</label>
+                <select class="form-control" data-plugin="select2" ng-model="detail.recipientAddress" ng-change="recipientAddressChange(detail.recipientAddress)" ng-disabled="detail.btnDisable">
+                  <option selected disabled value="" style="display: none;">{{'sendView.storedAddress' | translate}}</option>
+                  <option ng-repeat="book in books" value="{{book.value}}">
+                    {{ book.text }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-3">
+                <label class="form-control-label no-spin" for="inputBasicEmail">{{'sendView.coinsAmount' | translate}}</label>
+                <div class="input-group">
+                  <input type="number" class="form-control"
+                    placeholder="{{'sendView.placeholder.amount' | translate}}" autocomplete="off" ng-model="detail.amount" ng-change="amountChange(detail.amount)" ng-disabled="detail.btnDisable">
+                  <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="maxCoinClick()" ng-disabled="detail.btnDisable">{{'sendView.max' | translate}}</button>
+                  </span>
+                </div>
+              </div>
+              <div class="form-group col-md-2">
+                <label class="form-control-label" for="inputBasicEmail">{{'sendView.value' | translate}}</label>
+                <select class="form-control" data-plugin="select2" ng-model="detail.value" ng-change="valueChange(detail.value)" ng-disabled="detail.btnDisable">
+                  <option value="1">{{detail.sticker}}</option>
+                  <option value="0.001">{{detail.stickerSmall}}</option>
+                </select>
+              </div>
+              <div class="form-group col-md-5">
+                <label class="form-control-label" for="inputBasicEmail">{{'sendView.messagePrivTx' | translate}}</label>
+                <input type="text" class="form-control" id="inputBasicEmail" name="inputEmail"
+                  placeholder="{{'sendView.placeholder.message' | translate}}" autocomplete="off" ng-model="detail.message" ng-change="messageChange(detail.message)" ng-disabled="detail.btnDisable"/>
+              </div>
+              <div class="form-group col-md-2 bootstrap-touchspin">
+                <label class="form-control-label" for="inputBasicEmaidl">{{'sendView.fee' | translate}}</label>
+                <input type="number" class="form-control" name="touchSpinVertical" data-plugin="TouchSpin"
+              data-verticalbuttons="true" ng-model="detail.fee" ng-change="feeChange(detail.fee)" ng-disabled="detail.btnDisable"/>
+              </div>
+            </div>
+            <div class="h-60 vertical-align text-center" ng-hide="!detail.btnDisable">
+              <div class="loader vertical-align-middle loader-ellipsis"></div>
+            </div>
+            <div class="form-group text-right">
+              <button type="button" ng-click="sendMany()" class="btn btn-primary" ng-disabled="detail.btnDisable" ng-hide="detail.btnSendmanyDisable"><i class="ml-paperplane-ico"></i> {{'sendView.sendMany' | translate}}</button>
+              <button type="button" ng-click="sendClick()" class="btn btn-success" ng-disabled="detail.btnDisable"><i class="ml-paperplane-ico"></i> {{'sendView.send' | translate}}</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

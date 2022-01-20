@@ -1,0 +1,472 @@
+<div class="page-header">
+  <div class="page-header-actions">
+    <div class="btn-group">
+      <button type="button" class="btn btn-success dropdown-toggle" id="actionsDropdown" data-toggle="dropdown"
+        aria-expanded="false">{{'settingsView.toolsBtn' | translate}}</button>
+      <div class="dropdown-menu animate" aria-labelledby="actionsDropdown" role="menu">
+        <a class="dropdown-item" href="#" role="menuitem" ng-click="getPeers()"><i class="icon wb-info"
+            aria-hidden="true"></i>{{'settingsView.getPeersBtn' | translate}}</a>
+        <a class="dropdown-item" href="#" role="menuitem" ng-click="addPeers()"><i class="icon wb-wrench"
+            aria-hidden="true"></i>{{'settingsView.setPeersBtn' | translate}}</a>
+        <a class="dropdown-item" href="#" role="menuitem" ng-click="debug()"><i class="icon wb-desktop"
+            aria-hidden="true"></i>{{'settingsView.debugBtn' | translate}}</a>
+      </div>
+    </div>
+    <button type="button" class="btn btn-info" ng-click="faq()"><i class="icon wb-help-circle" aria-hidden="true"></i>
+      {{'global.helpButton' | translate}}</button>
+  </div>
+</div>
+
+<div class="page-content">
+  <!-- Modal -->
+  <div class="modal fade" id="restartWallet" data-backdrop="static" aria-hidden="false" aria-labelledby="restartWallet"
+    role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-simple modal-center">
+      <form class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+          <h4 class="modal-title">{{detail.title}}</h4>
+        </div>
+        <div class="modal-body">
+          <p>{{detail.text}}</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" data-dismiss="modal" type="button"
+            ng-click="restartAction()">{{detail.btn}}</button>
+          <button class="btn btn-default" data-dismiss="modal" type="button"> {{'global.close' | translate}}</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- End Modal -->
+
+  <div class="page-content">
+    <!-- Modal -->
+    <div class="modal fade" id="restartWallet2" data-backdrop="static" aria-hidden="false"
+      aria-labelledby="restartWallet" role="dialog" tabindex="-1">
+      <div class="modal-dialog modal-simple modal-center">
+        <form class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title">{{detail.title}}</h4>
+          </div>
+          <div class="modal-body">
+            <p>{{detail.text}}</p>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-primary" data-dismiss="modal" type="button"
+              ng-click="restartAction()">{{detail.btn}}</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- End Modal -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="defaultSettings" data-backdrop="static" aria-hidden="false"
+      aria-labelledby="defaultSettings" role="dialog" tabindex="-1">
+      <div class="modal-dialog modal-simple modal-center">
+        <form class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title">{{detail.title}}</h4>
+          </div>
+          <div class="modal-body">
+            <p>{{detail.text}}</p>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-primary" data-dismiss="modal" type="button"
+              ng-click="defaultAction()">{{detail.btn}}</button>
+            <button class="btn btn-default" data-dismiss="modal" type="button"> {{'global.close' | translate}}</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- End Modal -->
+
+    <!-- Modal -->
+    <div class="modal fade" style="white-space: pre-line;" id="alertSettings" data-backdrop="static" aria-hidden="true"
+      role="dialog" tabindex="-1">
+      <div class="modal-dialog modal-simple modal-center">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title">{{detail.title}}</h4>
+          </div>
+          <div class="modal-body">
+            <p>{{detail.text}}</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">{{'global.close' | translate}}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Modal -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="getPeersSettings" data-backdrop="static" data-keyboard="false" aria-hidden="false"
+      role="dialog" tabindex="-1">
+      <div class="modal-dialog modal-simple modal-center">
+        <form class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title">{{detail.title}}</h4>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-xl-12 form-group">
+                <textarea class="form-control" rows="7" ng-model="detail.text" readonly></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-default" data-dismiss="modal" type="button"> {{'global.close' | translate}}</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- End Modal -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="addPeersSettings" data-backdrop="static" data-keyboard="false" aria-hidden="false"
+      role="dialog" tabindex="-1">
+      <div class="modal-dialog modal-simple modal-center">
+        <form class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title">{{detail.title}}</h4>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-xl-12 form-group">
+                <textarea class="form-control" rows="7"
+                  placeholder="{{'settingsView.placeholder.peersInOneLine' | translate}}"
+                  ng-model="detail.peersList"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-success" data-dismiss="modal" type="button"
+              ng-click="addPeersAction(detail.peersList)">{{'settingsView.addBtn' | translate}}</button>
+            <button class="btn btn-default" data-dismiss="modal" type="button"> {{'global.close' | translate}}</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- End Modal -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="debugSettings" data-backdrop="static" data-keyboard="false" aria-hidden="false"
+      role="dialog">
+      <div class="modal-dialog modal-simple modal-center">
+        <form class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title">{{detail.title}}</h4>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-xl-12 form-group">
+                <textarea class="form-control font-size-12" rows="15" ng-model="detail.debugdata" readonly></textarea>
+              </div>
+              <div class="col-xl-12 form-group">
+                <input class="form-control" tabindex="-1" autocomplete="off" ng-model="detail.debugcommand"
+                  ng-keyup="startDebugging($event)">
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-default" data-dismiss="modal" type="button"> {{'global.close' | translate}}</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- End Modal -->
+
+
+    <div class="modal fade" id="modalEncrypt" data-backdrop="static" aria-hidden="true" aria-labelledby="modalEncrypt"
+      role="dialog" tabindex="-1">
+      <div class="modal-dialog modal-simple modal-center">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title">{{detail.title}}</h4>
+          </div>
+          <div class="modal-body">
+            <div class="col-md-12">
+              <div class="form-group row">
+                <label class="col-md-2 form-control-label">{{'navbar.password' | translate}} </label>
+                <div class="col-md-10">
+                  <input class="form-control" name="name" autocomplete="off" type="text" ng-model="detail.password">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal"
+              ng-click="encryptWallet()">{{detail.btn}}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Modal -->
+
+    <div class="modal fade" id="modalChangePass" data-backdrop="static" aria-hidden="true"
+      aria-labelledby="modalNavbarChangePass" role="dialog" tabindex="-1">
+      <div class="modal-dialog modal-simple modal-center">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title">{{detail.title}}</h4>
+          </div>
+          <div class="modal-body">
+            <div class="form-group row">
+              <label class="col-md-2 form-control-label">{{'settingsView.oldPassword' | translate}} </label>
+              <div class="col-md-10">
+                <input class="form-control" name="name" autocomplete="off" type="text" ng-model="detail.oldPassword">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-2 form-control-label">{{'settingsView.newPassword' | translate}} </label>
+              <div class="col-md-10">
+                <input class="form-control" name="name" autocomplete="off" type="text" ng-model="detail.newPassword">
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal"
+              ng-click="changePass()">{{'settingsView.change' | translate}}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Modal -->
+
+    <!-- Panel Wallet Address -->
+    <div class="panel" style="position: relative;height: 100%;">
+      <div class="panel-body container-fluid">
+        <!-- Modal Alert-->
+
+        <div class="row row-lg">
+          <div class="col-md-12">
+            <div class="form-group row">
+              <div class="col-md-12 center">
+                <span ng-repeat="coin in detail.coins">
+                  <button class="btn btn-lg text-center"
+                    ng-style="{'background-color': coin.name == detail.currentCoin ? 'powderblue' : 'transparent','width': '100px'}"
+                    ng-click="selectCoin(coin.name)"><img width="32" height="32"
+                      ng-src="{{coin.icon}}"><br><small>{{coin.name}}</small></button>
+                </span>
+              </div>
+            </div>
+            <hr style="border-color: black">
+            <div class="form-group row">
+              <div class="col-md-3">
+                <button class="btn btn-default btn-block" type="button" ng-click="openDaemon()"><i
+                    class="icon wb-folder" aria-hidden="true"></i> {{'settingsView.daemonLocation' | translate}}
+                </button>
+              </div>
+              <div class="col-md-9">
+                <input class="form-control" id="daemon-file" name="name" autocomplete="off" type="text"
+                  ng-model="detail.daemon" readonly>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-3">
+                <button class="btn btn-default btn-block" type="button" ng-click="openDataLocation()"><i
+                    class="icon wb-folder" aria-hidden="true"></i> {{'settingsView.dataLocation' | translate}} </button>
+              </div>
+              <div class="col-md-9">
+                <input class="form-control" id="data-dir" name="name" autocomplete="off" type="text"
+                  ng-model="detail.dataLocation" readonly>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-3">
+                <button class="btn btn-default btn-block" type="button" ng-click="openBackground()"><i
+                    class="icon wb-image" aria-hidden="true"></i> {{'settingsView.background' | translate}} </button>
+              </div>
+              <div class="col-md-9">
+                <input class="form-control" id="background-file" name="name" autocomplete="off" type="text"
+                  ng-model="detail.backgroundLocation" readonly>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-3">
+                <select class="form-control" data-plugin="select2" ng-model="detail.bot" ng-change="botTypeChange()">
+                  <option ng-repeat="p in detail.bottype" value="{{p}}">
+                    {{p}}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-2">
+                <input class="form-control" name="name" autocomplete="off" type="text" ng-model="detail.botname"
+                  ng-keypress="botNamePress($event)" placeholder="{{'settingsView.placeholder.botName' | translate}}">
+              </div>
+              <div class="col-md-7">
+                <input class="form-control" name="name" autocomplete="off" type="text" ng-model="detail.apikey"
+                  placeholder="{{'settingsView.placeholder.apiKey' | translate}}">
+              </div>
+            </div>
+            <div class="form-group row" ng-show="detail.shield" ng-hide="!detail.autoshield">
+              <div class="col-md-12 form-inline">
+                <label class="form-control-label"
+                  style="padding: 0 5px 0 0px; width: 9em">{{'settingsView.shieldThreshold' | translate}}</label>
+                <input class="form-control" style="width: 7em" autocomplete="off" type="number"
+                  ng-model="detail.shieldthreshold" />
+                <label style="padding: 0 5px 0 5px;width: 1.5em"> {{'settingsView.to' | translate}} </label>
+                <select class="form-control" style="width: calc(100% - 18em); float: right" data-plugin="select2"
+                  ng-model="detail.shieldaddress" ng-click="selectPrivAddress(detail.shieldaddress)">
+                  <option ng-repeat="privateAddress in privateAddresses" value="{{privateAddress.value}}">
+                    {{ privateAddress.text }}</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="form-inline">
+                <label class="form-control-label" style="padding: 0 5px 0 5px; width: 9em"><i class="icon fa-money"
+                    aria-hidden="true"></i>&nbsp; {{'settingsView.currency' | translate}} </label>
+                <select class="form-control" style="width: 7em" data-plugin="select2" ng-model="detail.currency"
+                  ng-change="valueChange(detail.currency)">
+                  <option ng-repeat="p in detail.price" value="{{p.code}}">
+                    {{p.code}}
+                  </option>
+                </select>
+                <label class="form-control-label" style="padding: 0 5px 0 5px; width: 9em"><i class="icon fa-calendar"
+                    aria-hidden="true"></i>&nbsp; {{'settingsView.dateType' | translate}} </label>
+                <select class="form-control" style="width: 11em" data-plugin="select2" ng-model="detail.datetime"
+                  ng-change="dateChange(detail.datetime)">
+                  <option ng-repeat="p in detail.datetimeType" value="{{p.value}}">
+                    {{p.key}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="form-inline">
+                <label class="form-control-label" ng-show="detail.showTransactionTime"
+                  style="padding: 0 5px 0 5px; width: 13em"><i class="icon wb-time" aria-hidden="true"></i>&nbsp;
+                  {{'settingsView.txTime' | translate}} </label>
+                <select class="form-control" ng-show="detail.showTransactionTime" style="width: 7em"
+                  data-plugin="select2" ng-model="detail.transactionstime"
+                  ng-change="txChange(detail.transactionstime)">
+                  <option ng-repeat="p in detail.transactionsType" value="{{p.value}}">
+                    {{p.key}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <button type="button" ng-click="backupClick()" data-dismiss="modal" class="btn btn-success"><i
+                  class="icon wb-download" aria-hidden="true"></i> {{'settingsView.backupWlt' | translate}} </button>
+              <button type="button" ng-click="restoreClick()" data-dismiss="modal" class="btn btn-info"><i
+                  class="icon wb-upload" aria-hidden="true"></i> {{'settingsView.restoreWlt' | translate}} </button>
+              <button type="button" ng-click="rescanClick()" data-dismiss="modal" class="btn btn-primary"><i
+                  class="icon wb-search" aria-hidden="true"></i> {{'settingsView.rescanWlt' | translate}} </button>
+              <button type="button" ng-click="reindexClick()" data-dismiss="modal" class="btn btn-secondary"><i
+                  class="icon wb-replay" aria-hidden="true"></i> {{'settingsView.reindexWlt' | translate}} </button>
+              <button type="button" ng-click="encrypt()" data-dismiss="modal" class="btn btn-warning"
+                ng-show=detail.showencryption><i class="icon wb-lock" aria-hidden="true"></i>
+                {{'settingsView.encryptWlt' | translate}} </button>
+              <button type="button" ng-click="changePhrase()" data-dismiss="modal" class="btn btn-danger"
+                ng-show=detail.showencryption><i class="icon wb-lock" aria-hidden="true"></i>
+                {{'settingsView.changePassword' | translate}} </button>
+            </div>
+            <hr style="border-color: black">
+            <div class="form-group row margin-zero">
+              <div class="form-inline">
+                <label class="switch" title="{{'settingsView.autoStartTip' | translate}}">
+                  <input type="checkbox" ng-model="detail.autostart">
+                  <span class="slider round"></span>
+                </label>
+                <span
+                  class="control-label setting-label margin-two switch-label">{{'settingsView.autoStartBtn' | translate}}</span>
+              </div>
+              <div class="form-inline align-middle">
+                <label class="switch" title="{{'settingsView.autoUpdateDaemonTip' | translate}}">
+                  <input type="checkbox" ng-model="detail.autoupdatedaemon">
+                  <span class="slider round"></span>
+                </label>
+                <span
+                  class="control-label setting-label margin-two switch-label">{{'settingsView.autoUpdateDaemonBtn' | translate}}</span>
+              </div>
+              <div class="form-inline">
+                <label class="switch" title="{{'settingsView.enableLogTip' | translate}}">
+                  <input type="checkbox" ng-model="detail.enablelog">
+                  <span class="slider round"></span>
+                </label>
+                <span
+                  class="control-label setting-label margin-two switch-label">{{'settingsView.enableLogBtn' | translate}}</span>
+              </div>
+              <div class="form-inline">
+                <label class="switch" title="{{'settingsView.txsChartTip' | translate}}">
+                  <input type="checkbox" ng-model="detail.transactionschart">
+                  <span class="slider round"></span>
+                </label>
+                <span
+                  class="control-label setting-label margin-two switch-label">{{'settingsView.txsChartBtn' | translate}}</span>
+              </div>
+              <div class="form-inline">
+                <label class="switch" title="{{'settingsView.hideOnMinimizeTip' | translate}}">
+                  <input type="checkbox" ng-model="detail.closeminimize">
+                  <span class="slider round"></span>
+                </label>
+                <span
+                  class="control-label setting-label margin-two switch-label">{{'settingsView.hideOnMinimizeBtn' | translate}}</span>
+              </div>
+              <div class="form-inline" ng-show="detail.shield">
+                <label class="switch" title="{{'settingsView.autoShieldTip' | translate}}">
+                  <input type="checkbox" ng-model="detail.autoshield">
+                  <span class="slider round"></span>
+                </label>
+                <span
+                  class="control-label setting-label margin-two switch-label">{{'settingsView.autoShieldBtn' | translate}}</span>
+              </div>
+              <div class="form-inline">
+                <label class="switch" title="{{'settingsView.showFiatBalanceTip' | translate}}">
+                  <input type="checkbox" ng-model="detail.showFiatBalance">
+                  <span class="slider round"></span>
+                </label>
+                <span
+                  class="control-label setting-label margin-two switch-label">{{'settingsView.showFiatBalanceBtn' | translate}}</span>
+              </div>
+              <!-- <div class="form-inline">
+              <label class="switch" title="Hide Zero Address">
+                <input type="checkbox" ng-model="detail.hidezeroaddress">
+                <span class="slider round"></span>
+              </label>
+              <span class="control-label setting-label margin-two switch-label">Hide Zero Addresses</span>
+            </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group float-right" style="padding-bottom: 30px;">
+      <button type="button" ng-click="applyClick()" data-dismiss="modal" class="btn btn-success"><i
+          class="icon wb-check" aria-hidden="true"></i> {{'global.apply' | translate}} </button>
+      <button type="button" ng-click="defaultClick()" data-dismiss="modal" class="btn btn-warning"><i
+          class="icon wb-trash" aria-hidden="true"></i> {{'global.default' | translate}} </button>
+      <button type="button" ng-click="cancelClick()" data-dismiss="modal" class="btn btn-primary"><i
+          class="icon wb-close" aria-hidden="true"></i> {{'global.cancel' | translate}} </button>
+    </div>
+  </div>

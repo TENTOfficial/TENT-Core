@@ -1,0 +1,83 @@
+<div class="page-content">
+  <!-- Panel Wallet Address -->
+  <div class="panel">
+    <div class="panel-body container-fluid">
+      <!-- Modal Alert-->
+      <div class="modal fade" id="modalShieldAlert" data-backdrop="static" aria-hidden="true" aria-labelledby="modalShieldAlert"
+      role="dialog" tabindex="-1">
+        <div class="modal-dialog modal-simple modal-center">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+              <h4 class="modal-title">{{detail.title}}</h4>
+            </div>
+            <div class="modal-body">
+              <p>{{detail.text}}</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">{{'global.close' | translate}}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Modal -->
+
+      <!-- Modal -->
+      <div class="modal fade" id="shieldAllConfirmation" data-backdrop="static" aria-hidden="false" role="dialog" tabindex="-1">
+        <div class="modal-dialog modal-simple modal-center">
+          <form class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+              <h4 class="modal-title">{{detail.title}}</h4>
+            </div>
+            <div class="modal-body">
+              <p>{{detail.text}}</p>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-success" data-dismiss="modal" type="button" ng-click="shieldAllAction()"> {{'global.ok' | translate}}</button>
+              <button class="btn btn-default" data-dismiss="modal" type="button"> {{'global.cancel' | translate}}</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- End Modal -->
+
+      <div class="row row-lg">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label class="form-control-label" for="inputUserNameOne">{{'shieldView.address' | translate}}</label>
+            <select class="form-control" data-plugin="select2" ng-disabled="!detail.btnEnabled" ng-model="detail.publicAddr" ng-click="selectPubAddress(detail.publicAddr)">
+                <option selected disabled value="" style="display: none;">{{'shieldView.chooseAddress' | translate}}</option>
+                <option ng-repeat="publicAddress in publicAddresses" value="{{publicAddress.value}}">{{ publicAddress.text }}</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-control-label" for="inputUserNameOne">{{'shieldView.privateAddr' | translate}}</label>
+            <select class="form-control" data-plugin="select2" ng-disabled="!detail.btnEnabled" ng-model="detail.privateAddr" ng-click="selectPrivAddress(detail.privateAddr)">
+                <option selected disabled value="" style="display: none;">{{'shieldView.choosePrivateAddr' | translate}}</option>
+                <option ng-repeat="privateAddress in privateAddresses" value="{{privateAddress.value}}">{{ privateAddress.text }}</option>
+            </select>
+          </div>
+
+          <div class="form-group bootstrap-touchspin">
+            <label class="form-control-label" for="inputBasicEmail">{{'sendView.fee' | translate}}</label>
+            <input type="number" class="form-control" ng-disabled="!detail.btnEnabled" name="touchSpinVertical" data-plugin="TouchSpin" data-verticalbuttons="true"
+              value="0.0001" ng-model="detail.fee" ng-change="feeChange(detail.fee)"/>
+          </div>
+          <div class="h-60 vertical-align text-center" ng-hide="detail.btnEnabled">
+            <div class="loader vertical-align-middle loader-ellipsis"></div>
+          </div>
+          <div class="form-group text-right">
+            <button type="button" ng-disabled="!detail.btnEnabled" ng-click="shieldClick()" class="btn btn-primary" title="{{'shieldView.tooltip.shield' | translate}}"><i class="fa-shield" style="margin-right: 5px;"></i> {{'shieldView.shield' | translate}}</button>
+            <button type="button" ng-disabled="!detail.btnEnabled" ng-click="shieldAllClick()" class="btn btn-success" title="{{'shieldView.tooltip.shieldAll' | translate}}"><i class="fa-asterisk" style="margin-right: 5px;"></i> {{'shieldView.shieldAll' | translate}}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

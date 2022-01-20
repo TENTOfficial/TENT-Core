@@ -1,0 +1,25 @@
+code {
+	padding: $code-padding-y $code-padding-x;
+  border: 1px solid $code-border-color;
+  background-color: $code-bg;
+  @include border-radius($border-radius);
+
+  a > & {
+    padding: 0;
+    background-color: inherit;
+  }
+}
+
+// Blocks of code
+pre {
+  padding: (($line-height-computed - 1px) / 2);
+  color: $pre-color;
+  border: 1px solid $pre-border-color;
+  border-radius: $border-radius;
+
+  code {
+  	padding: 0;
+  	background-color: transparent;
+    border-radius: 0;
+  }
+}

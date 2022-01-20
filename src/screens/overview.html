@@ -1,0 +1,212 @@
+<div class="page-header h-200 mb-30">
+  <div class="text-center blue-grey-800">
+    <div class="font-size-50 blue-grey-800">{{startingText}}</div>
+    <ul class="list-inline font-size-14">
+      <li class="list-inline-item mb-30">
+        <i class="icon wb-stats-bars mr-5" aria-hidden="true"></i> {{'dashboardView.infoMsg1' | translate}} {{detail.coin}} {{'dashboardView.infoMsg2' | translate}}
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="page-content container-fluid">
+  <!-- Modal Alert-->
+  <div class="modal fade" id="modalOverviewAlert" data-backdrop="static" aria-hidden="true" aria-labelledby="modalOverviewAlert"
+  role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-simple modal-center">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+          <h4 class="modal-title">{{detail.title}}</h4>
+        </div>
+        <div class="modal-body">
+          <p>{{detail.text}}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">{{'global.close' | translate}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Modal -->
+
+  <!-- page-content -->
+  <div class="row">
+
+    <div class="col-md-12" ng-show="detail.showBanner">
+      <!-- Notification area -->
+      <div class="panel panel-bordered panel-danger">
+        <div class="panel-heading">
+          <h3 class="panel-title"><i class="icon wb-warning" aria-hidden="true"></i> {{'dashboardView.importantInfo' | translate}}</h3>
+          <div class="panel-actions">
+            <a class="panel-action icon wb-close" data-toggle="panel-close" aria-hidden="true" ng-click="closeOverviewBanner()"></a>
+          </div>
+        </div>
+        <div class="panel-body">
+          <a data-dismiss="modal" style="display: block; margin-left: auto; margin-right: auto" ng-click="closeOverviewBanner(detail.banner.redirectUrl)" ng-attr-title="{{detail.banner.detail}}">
+            <img class="img-responsive" ng-src="{{detail.banner.imgUrl}}" style="display: block; margin-left: auto; margin-right: auto;max-height:250px;cursor: pointer;">
+          </a>
+        </div>
+      </div>
+    <!-- End Notification area -->
+    </div>
+
+    <div class="col-md-4">
+      <!-- Card Total-->
+      <div class="card card-block bg-green-600">
+        <div class="card-watermark darker font-size-80 m-15"><i class="icon fa-bar-chart" aria-hidden="true"></i></div>
+        <div class="counter counter-md counter-inverse text-left">
+          <div class="counter-number-group font-size-24">
+            <span class="counter-number">{{'dashboardView.table.total' | translate}}</span>
+          </div>
+          <div class="counter-label text-capitalize font-size-16">{{ balances.totalCoins }} <span class="font-weight-bold">{{detail.sticker}}</span></div>
+          <div class="counter-label text-capitalize font-size-11" ng-show="detail.showFiat">{{ balances.totalFiat }} <span class="font-weight-bold">{{detail.fiatSymbol}}</span></div>
+        </div>
+      </div>
+    <!-- End Card -->
+    </div>
+
+    <div class="col-md-4">
+      <!-- Card Immature-->
+      <div class="card card-block bg-grey-400">
+        <div class="card-watermark darker font-size-80 m-15"><i class="icon fa-clock-o" aria-hidden="true"></i></div>
+        <div class="counter counter-md counter-inverse text-left">
+          <div class="counter-number-group font-size-24">
+            <span class="counter-number">{{'dashboardView.table.immature' | translate}}</span>
+          </div>
+          <div class="counter-label text-capitalize font-size-16">{{ balances.immatureCoins }} <span class="font-weight-bold">{{detail.sticker}}</span></div>
+          <div class="counter-label text-capitalize font-size-11" ng-show="detail.showFiat">{{ balances.immatureFiat }} <span class="font-weight-bold">{{detail.fiatSymbol}}</span></div>
+        </div>
+      </div>
+      <!-- End Card -->
+    </div>
+
+    <div class="col-md-4">
+      <!-- Card Unconfirmed-->
+      <div class="card card-block bg-blue-600">
+        <div class="card-watermark darker font-size-80 m-15"><i class="icon fa-flag-checkered" aria-hidden="true"></i></div>
+        <div class="counter counter-md counter-inverse text-left">
+          <div class="counter-number-group font-size-24">
+            <span class="counter-number">{{'dashboardView.table.unconfirmed' | translate}}</span>
+          </div>
+          <div class="counter-label text-capitalize font-size-16">{{ balances.unconfirmedCoins }} <span class="font-weight-bold">{{detail.sticker}}</span></div>
+          <div class="counter-label text-capitalize font-size-11" ng-show="detail.showFiat">{{ balances.unconfirmedFiat }} <span class="font-weight-bold">{{detail.fiatSymbol}}</span></div>
+        </div>
+      </div>
+      <!-- End Card -->
+      </div>
+
+    <div class="col-md-4">
+      <!-- Card Transparent-->
+      <div class="card card-block bg-red-600">
+        <div class="card-watermark darker font-size-80 m-15"><i class="icon fa-globe" aria-hidden="true"></i></div>
+        <div class="counter counter-md counter-inverse text-left">
+          <div class="counter-number-group font-size-24">
+            <span class="counter-number">{{'dashboardView.table.transparent' | translate}}</span>
+          </div>
+          <div class="counter-label text-capitalize font-size-16">{{ balances.transparentCoins }} <span class="font-weight-bold">{{detail.sticker}}</span></div>
+          <div class="counter-label text-capitalize font-size-11" ng-show="detail.showFiat">{{ balances.transparentFiat }} <span class="font-weight-bold">{{detail.fiatSymbol}}</span></div>
+        </div>
+      </div>
+    <!-- End Card -->
+    </div>
+
+    <div class="col-md-4">
+      <!-- Card Private -->
+      <div class="card card-block bg-grey-600">
+        <div class="card-watermark darker font-size-80 m-15"><i class="icon fa-shield" aria-hidden="true"></i></div>
+        <div class="counter counter-md counter-inverse text-left">
+          <div class="counter-number-group font-size-24">
+            <span class="counter-number">{{'dashboardView.table.private' | translate}}</span>
+          </div>
+          <div class="counter-label text-capitalize font-size-16">{{ balances.privateCoins }} <span class="font-weight-bold">{{detail.sticker}}</span></div>
+          <div class="counter-label text-capitalize font-size-11" ng-show="detail.showFiat">{{ balances.privateFiat }} <span class="font-weight-bold">{{detail.fiatSymbol}}</span></div>
+        </div>
+      </div>
+    <!-- End Card -->
+    </div>
+
+    <div class="col-md-4" ng-hide="detail.hideLockedCard">
+      <!-- Card Locked-->
+      <div class="card card-block bg-orange-300">
+        <div class="card-watermark darker font-size-80 m-15"><i class="icon fa-lock" aria-hidden="true"></i></div>
+        <div class="counter counter-md counter-inverse text-left">
+          <div class="counter-number-group font-size-24">
+            <span class="counter-number">{{'dashboardView.table.locked' | translate}}</span>
+          </div>
+          <div class="counter-label text-capitalize font-size-16">{{ balances.lockedCoins }} <span class="font-weight-bold">{{detail.sticker}}</span></div>
+          <div class="counter-label text-capitalize font-size-11" ng-show="detail.showFiat">{{ balances.lockedFiat }} <span class="font-weight-bold">{{detail.fiatSymbol}}</span></div>
+        </div>
+      </div>
+      <!-- End Card -->
+    </div>
+
+    <!-- MondernChartbyDaX-->
+
+    <div class="col-xxl-9 col-xl-9 col-lg-8 col-md-12" ng-show="detail.transactionschart">
+      <!-- Panel Bar Stacked -->
+      <div class="card card-shadow">
+        <div class="card-block p-0 p-5 h-full">
+          <div class="chart-header pb-10">
+            <div class="font-size-20 inline-block">
+            {{detail.chartText}}
+            </div>
+          </div>
+          <div id="chartLines" style="max-height: 250px;">
+          </div>
+        </div>
+      </div>
+      <!-- End Panel Bar Stacked -->
+    </div>
+
+    <div class="col-xxl-3 col-xl-3 col-lg-4 hidden-md-down" ng-show="detail.transactionschart">
+      <!-- Panel Pie -->
+      <div class="card card-shadow">
+        <div class="card-block p-0 p-5 h-full">
+          <div class="font-size-20 text-center">
+          {{'dashboardView.table.txsSummary' | translate}}
+          </div>
+          <div id="chartDonut" class="absolute-center" style="max-height: 180px;">
+          </div>
+          <div class="row no-space absolute-bottom">
+            <div class="col-6">
+              <div class="counter">
+                <div class="counter-number-group">
+                  <span class="counter-number-related">
+                  <span class="counter-number font-size-18">{{detail.dataChart.totalIn}}
+                  </span>
+                </div>
+                <div class="counter-label text-uppercase">
+                  <span class="counter-number-related">
+                    <span class="icon wb-medium-point green-600"></span>
+                  </span>
+                {{'dashboardView.table.incoming' | translate}}
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="counter">
+                <div class="counter-number-group">
+                  <span class="counter-number-related">
+                  <span class="counter-number font-size-18">{{detail.dataChart.totalOut}}
+                  </span>
+                </div>
+                <div class="counter-label text-uppercase">
+                  <span class="counter-number-related">
+                    <span class="icon wb-medium-point red-600"></span>
+                  </span>
+                {{'dashboardView.table.outgoing' | translate}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Panel Pie -->
+    </div>
+   <!-- End Row -->
+  </div>
+<!-- End Page Content -->
+</div>

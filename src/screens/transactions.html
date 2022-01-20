@@ -1,0 +1,71 @@
+<div class="page-content">
+  <!-- Panel Wallet Address -->
+  <div class="panel">
+    <div class="panel-body container-fluid">
+
+       <!-- Modal -->
+      <div class="modal fade" id="txModal" data-backdrop="static" aria-hidden="true" aria-labelledby="txModal"
+      role="dialog" tabindex="-1">
+        <div class="modal-dialog modal-simple modal-center">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+              <h4 class="modal-title">{{'transactionsView.txDetails' | translate}}</h4>
+            </div>
+            <div class="modal-body">
+              <div class="col-md-12">
+                <a class="text-info" href="{{detail.txurl}}">{{'transactionsView.viewOnExplorer' | translate}}</a>
+              </div>
+              <div class="col-md-12">
+                <textarea class="form-control" rows="7" ng-model="transactionData" readonly></textarea>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">{{'global.close' | translate}}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Modal -->
+
+      <div class="row row-lg">
+        <div class="col-12">
+          <div class="table-responsive">
+            <table class="table" style="overflow: auto">
+              <thead>
+                <tr>
+                  <th style="width: 7%;">#</th>
+                  <th style="width: 10%;">{{'transactionsView.table.direction' | translate}}</th>
+                  <th style="width: 20%;">{{'transactionsView.table.date' | translate}}</th>
+                  <th style="width: 42%;">{{'transactionsView.table.address' | translate}}</th>
+                  <th style="width: 15%;">{{'transactionsView.table.amount' | translate}}</th>
+                  <th style="width: 8%;">{{'transactionsView.table.validated' | translate}}</th>
+                  <th style="width: 8%;">{{'transactionsView.table.details' | translate}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="tx in transactions" ng-model="tx.value">
+                  <td>{{tx.no}}</td>
+                  <td>
+                    <span ng-class="tx.direction == 'send' ? 'badge badge-danger' : 'badge badge-success'">{{tx.direction === 'send' ? ('transactionsView.table.send' | translate) : tx.direction === 'receive' ? ('transactionsView.table.receive' | translate) : ('transactionsView.table.generate' | translate)}}</span>
+                  </td>
+                  <td style="white-space: nowrap">{{tx.date}}</td>
+                  <td>{{tx.address}}</td>
+                  <td ng-class="tx.direction == 'send' ? 'red-600' : 'green-600'">{{tx.amount}}</td>
+                  <td>
+                    <span ng-class="tx.validated.includes('No') ? 'badge badge-danger' : 'badge badge-success'">{{tx.validated.includes('No') ? ('global.no' | translate) + ' (' + tx.confirmations + ')' : tx.validated.includes('Immature') ? ('transactionsView.table.immature' | translate)  + ' (' + tx.confirmations + ')' : ('global.yes' | translate)}}</span>
+                  </td>
+                  <td class="align-middle">
+                    <button type="button" class="btn btn-pure btn-default icon wb-clipboard" ng-click="viewDetail(tx.value)" style="padding: 0px;"></button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

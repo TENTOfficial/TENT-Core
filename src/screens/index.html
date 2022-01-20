@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html class="no-js css-menubar" lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+  <meta name="description" content="bootstrap admin template">
+  <meta name="author" content="">
+
+  <title></title>
+
+  <link rel="apple-touch-icon" href="../../assets/images/apple-touch-icon.png">
+  <link rel="shortcut icon" href="../../assets/images/favicon.ico">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../global/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../global/css/bootstrap-extend.min.css">
+  <link rel="stylesheet" href="../../assets/css/site.min.css">
+
+  <link href="../../assets/skins/tent.css" rel="stylesheet" type="text/css">
+
+  <!-- Plugins -->
+  <link rel="stylesheet" href="../../global/vendor/animsition/animsition.css">
+  <link rel="stylesheet" href="../../global/vendor/asscrollable/asScrollable.css">
+  <link rel="stylesheet" href="../../global/vendor/switchery/switchery.css">
+  <link rel="stylesheet" href="../../global/vendor/intro-js/introjs.css">
+  <link rel="stylesheet" href="../../global/vendor/slidepanel/slidePanel.css">
+  <link rel="stylesheet" href="../../global/vendor/flag-icon-css/flag-icon.css">
+  <link rel="stylesheet" href="../../global/vendor/chartist/chartist.css">
+  <link rel="stylesheet" href="../../global/vendor/aspieprogress/asPieProgress.css">
+  <link rel="stylesheet" href="../../assets/examples/css/dashboard/v2.css">
+  <link rel="stylesheet" href="../../global/vendor/morris/morris.css">
+
+  <link rel="stylesheet" href="../../global/css/chart-dashboard.css">
+  <link rel="stylesheet" href="../../node_modules/angular/angular-csp.css">
+  <!-- Fonts -->
+  <link rel="stylesheet" href="../../global/fonts/web-icons/web-icons.min.css">
+  <link rel="stylesheet" href="../../global/fonts/font-awesome/font-awesome.css">
+  <link rel="stylesheet" href="../../global/fonts/font-awesome-5.9.0/css/all.css">
+  <link rel="stylesheet" href="../../global/fonts/brand-icons/brand-icons.min.css">
+  <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'>
+  <link rel="stylesheet" href="../../global/fonts/mfglabs/mfglabs.css">
+  <link rel="stylesheet" href="../../global/fonts/themify/themify.css">
+  <link rel="stylesheet" href="../../global/fonts/material-design/material-design.css">
+
+  <!-- <link rel="stylesheet" href="../../global/vendor/jquery-wizard/jquery-wizard.css">
+    <link rel="stylesheet" href="../../global/vendor/formvalidation/formValidation.css"> -->
+  <link rel="stylesheet" href="../../assets/examples/css/uikit/dropdowns.css">
+
+  <link rel="stylesheet" href="../../global/vendor/nprogress/nprogress.css">
+  <link rel="stylesheet" href="../../assets/examples/css/advanced/animation.css">
+  <link rel="stylesheet" href="../../assets/examples/css/uikit/progress-bars.css">
+  <link href="../../assets/skins/tent.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+    integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+  <!-- Scripts -->
+  <script src="../../global/vendor/breakpoints/breakpoints.js"></script>
+  <script>
+    Breakpoints();
+  </script>
+</head>
+
+<body class="animsition dashboard site-menubar-fold" ng-app="tentcore">
+  <!-- Body -->
+
+  <div id="titlebar-main">
+    <div id="window-title-main">
+      <span></span>
+    </div>
+    <div id="window-controls-main">
+      <div class="button" id="minimize-button">
+        <span>&#xE921;</span>
+      </div>
+      <div class="button" id="min-max-button">
+        <span>&#xE922;</span>
+      </div>
+      <div class="button" id="restore-button">
+        <span>&#xE923;</span>
+      </div>
+      <div class="button" id="close-button">
+        <span>&#xE8BB;</span>
+      </div>
+    </div>
+  </div>
+
+  <div ng-controller="ModalCtrl">
+    <div class="modal fade" id="modalNavbarAlert" data-backdrop="static" aria-hidden="true"
+      aria-labelledby="modalNavbarAlert" role="dialog" tabindex="-1">
+      <div class="modal-dialog modal-simple modal-center">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title">{{detail.title}}</h4>
+          </div>
+          <div class="modal-body">
+            <p>{{detail.text}}</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">{{'global.close' | translate}}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Modal -->
+
+    <div class="modal fade" id="modalNavbarUnlock" data-backdrop="static" aria-hidden="true"
+      aria-labelledby="modalNavbarUnlock" role="dialog" tabindex="-1">
+      <div class="modal-dialog modal-simple modal-center">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title">{{detail.title}}</h4>
+          </div>
+          <div class="modal-body">
+            <div class="col-md-12">
+              <div class="form-group row">
+                <label class="col-md-2 form-control-label">{{'navbar.password' | translate}} </label>
+                <div class="col-md-10">
+                  <input class="form-control" name="name" autocomplete="off" type="text"
+                    ng-model="detail.unlockPassword">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal"
+              ng-click="unlock()">{{'navbar.unlock' | translate}}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Modal -->
+
+  </div>
+  <nav class="site-navbar navbar navbar-default navbar-fixed-top navbar-mega" role="navigation"
+    ng-controller="NavBarCtrl" style="padding-top: 32px;">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggler hamburger hamburger-close navbar-toggler-left hided"
+        data-toggle="menubar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="hamburger-bar"></span>
+      </button>
+      <button type="button" class="navbar-toggler collapsed" data-target="#site-navbar-collapse" data-toggle="collapse">
+        <i class="icon wb-more-horizontal" aria-hidden="true"></i>
+      </button>
+      <div class="navbar-brand navbar-brand-center site-gridmenu-toggle" data-toggle="gridmenu">
+        <img class="navbar-brand-logo" src="../../assets/images/core-small.png" title="TENT">
+        <span class="navbar-brand-text hidden-xs-down"><img src="../../assets/images/core3.png"
+            title="{{'navbar.logoTitle' | translate}}"></span>
+      </div>
+    </div>
+
+    <div class="navbar-container container-fluid">
+      <!-- Navbar Collapse -->
+      <div class="collapse navbar-collapse navbar-collapse-toolbar" id="site-navbar-collapse">
+        <!-- Navbar Toolbar -->
+        <ul class="nav navbar-toolbar">
+          <li class="nav-item hidden-float" id="toggleMenubar">
+            <a class="nav-link" data-toggle="menubar" href="#" role="button">
+              <i class="icon hamburger hamburger-arrow-left" title="{{'navbar.menuIconTitle' | translate}}">
+                <span class="sr-only"></span>
+                <span class="hamburger-bar"></span>
+              </i>
+            </a>
+          </li>
+        </ul>
+        <!-- End Navbar Toolbar -->
+        <!-- Price Widget -->
+        <ul class="nav navbar-toolbar">
+          <li class="nav-item hidden-sm-down">
+            <a class="nav-link" title="{{'navbar.reloadIconTitle' | translate}}" href="#" role="button"
+              ng-click="refreshWallet()">
+              <i class="icon wb-refresh" aria-hidden="true"></i>
+            </a>
+          </li>
+          <li class="nav-item hidden-sm-down">
+            <a class="nav-link" title="{{'global.helpButton' | translate}}" href="#" role="button"
+              ng-click="aboutClick()">
+              <i class="icon wb-help" aria-hidden="true"></i>
+            </a>
+          </li>
+          <li class="nav-item hidden-sm-down">
+            <a class="nav-link" title="{{'navbar.TwittertIconTitle' | translate}}" href="https://twitter.com/tentpay"
+              role="button">
+              <i class="fab fa-twitter" aria-hidden="true"></i>
+            </a>
+          </li>
+          <li class="nav-item hidden-sm-down">
+            <a class="nav-link" title="{{'navbar.DiscordIconTitle' | translate}}" href="https://tent.app/discord"
+              role="button">
+              <i class="fab fa-discord" aria-hidden="true"></i>
+            </a>
+          </li>
+          <!--<li class="nav-item hidden-sm-down">
+              <div class="navbar-brand font-size-15">
+                <i class="icon wb-triangle-up green-600" aria-hidden="true"></i> 0,10 &euro;
+              </div>
+            </li> -->
+        </ul>
+        <!-- End Price Widget -->
+
+        <!-- Navbar Toolbar Right -->
+        <ul class="nav navbar-toolbar navbar-right navbar-toolbar-right">
+          <li class="nav-item hidden-sm-down" ng-show="!detail.hideBar">
+            <div class="navbar-brand">
+              <div class="progress" style="width: 260px; height: 100%">
+                <div class="progress-bar progress-bar-success progress-bar-striped active" title="{{detail.synctitle}}"
+                  aria-valuenow="detail.progress" aria-valuemin="0" aria-valuemax="100"
+                  ng-style="{'width': detail.width, 'display':'table'}" role="progressbar">
+                  <p class="font-size-12" style="text-align: center; vertical-align: middle; display: table-cell">
+                    {{detail.synctitle}}</p>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="nav-item hidden-sm-down" ng-hide="detail.hideprice">
+            <div class="navbar-brand font-size-15 form-horizontal">
+              <p>{{detail.priceandsymbol}}</p>
+            </div>
+          </li>
+          <li class="nav-item hidden-sm-down" ng-hide="detail.hideprice">
+            <div class="navbar-brand font-size-15">
+              <p ng-class="detail.pricechange >= 0 ? 'text-success' : 'text-danger'" aria-hidden="true"></i>
+                {{detail.pricechange}}%
+            </div>
+          </li>
+          <li class="nav-item dropdown" ng-show="detail.showNoti">
+            <a class="nav-link pointer" data-toggle="dropdown" title="{{'navbar.notificationsIconTitle' | translate}}"
+              aria-expanded="false" data-animation="scale-up" role="button"
+              style="margin-top: 3px; padding-right: 20px;">
+              <i class="icon wb-bell" aria-hidden="true" style="color: #000000;"></i>
+              <span class="badge badge-pill badge-danger up">{{detail.notificationCounter}}</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right dropdown-menu-media" role="menu">
+              <div class="dropdown-menu-header">
+                <h5 translate>navbar.notificationsHeading</h5>
+                <span class="badge badge-round badge-danger">{{'navbar.notificationsBadgeNew' | translate}}
+                  {{detail.notificationCounter}}</span>
+              </div>
+
+              <div class="list-group">
+                <div data-role="container">
+                  <div data-role="content">
+                    <span ng-repeat="banner in detail.banners">
+                      <a class="list-group-item dropdown-item pointer" role="menuitem" ng-attr-title="{{banner.detail}}"
+                        ng-click="openNotification(banner.redirectUrl)">
+                        <div class="media">
+                          <div class="pr-10">
+                            <i class="icon wb-alert bg-red-600 white icon-circle" aria-hidden="true"></i>
+                          </div>
+                          <div class="media-body">
+                            <h6 class="media-heading">{{banner.title}}</h6>
+                            <time class="media-meta" datetime="2018-06-12T20:50:48+08:00"><i
+                                class="icon wb-link-intact red-600" aria-hidden="true"></i>
+                              {{'navbar.notificationsNote' | translate}}</time>
+                          </div>
+                        </div>
+                      </a>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="nav-item hidden-sm-down">
+            <div class="navbar-brand font-size-15">
+              <i ng-class="detail.connections > 0 ? 'wb wb-link' : 'wb wb-link-broken'"
+                title="{{'navbar.connectionsIconTitle' | translate}}: {{detail.connections}}{{detail.currentblock}}"
+                aria-hidden="true" style="margin-left:10px;"></i>
+            </div>
+          </li>
+          <li class="nav-item hidden-sm-down" ng-show="detail.isencrypted" ng-click="lockUnlock()">
+            <div class="navbar-brand font-size-15">
+              <i ng-class="detail.islocked ? 'wb wb-lock' : 'wb wb-unlock'" title="{{detail.lockstate}}"
+                aria-hidden="true" style="margin-left:10px;"></i>
+            </div>
+          </li>
+          <li class="nav-item dropdown pointer">
+            <a class="nav-link" data-toggle="dropdown" data-animation="scale-up" aria-expanded="false" role="button">
+              <span class="flag-icon" ng-class="getFlag()"></span>
+            </a>
+            <div class="dropdown-menu h-300 languages" role="menu" style="overflow-x: hidden;">
+              <a class="dropdown-item" role="menuitem" ng-click="changeLanguage(LanguageType.AE)">
+                <span class="flag-icon flag-icon-ae"></span> Arabic</a>
+              <a class="dropdown-item" role="menuitem" ng-click="changeLanguage(LanguageType.CN)">
+                <span class="flag-icon flag-icon-cn"></span> Chinese</a>
+              <a class="dropdown-item" role="menuitem" ng-click="changeLanguage(LanguageType.CZ)">
+                <span class="flag-icon flag-icon-cz"></span> Czech</a>
+              <a class="dropdown-item" role="menuitem" ng-click="changeLanguage(LanguageType.NL)">
+                <span class="flag-icon flag-icon-nl"></span> Dutch</a>
+              <a class="dropdown-item" role="menuitem" ng-click="changeLanguage(LanguageType.EN)">
+                <span class="flag-icon flag-icon-us"></span> English</a>
+              <a class="dropdown-item" role="menuitem" ng-click="changeLanguage(LanguageType.FR)">
+                <span class="flag-icon flag-icon-fr"></span> French</a>
+              <a class="dropdown-item" role="menuitem" ng-click="changeLanguage(LanguageType.DE)">
+                <span class="flag-icon flag-icon-de"></span> German</a>
+              <a class="dropdown-item" role="menuitem" ng-click="changeLanguage(LanguageType.HU)">
+                <span class="flag-icon flag-icon-hu"></span> Hungarian</a>
+              <a class="dropdown-item" role="menuitem" ng-click="changeLanguage(LanguageType.IT)">
+                <span class="flag-icon flag-icon-it"></span> Italian</a>
+              <a class="dropdown-item" role="menuitem" ng-click="changeLanguage(LanguageType.KR)">
+                <span class="flag-icon flag-icon-kr"></span> Korean</a>
+              <a class="dropdown-item" role="menuitem" ng-click="changeLanguage(LanguageType.PL)">
+                <span class="flag-icon flag-icon-pl"></span> Polish</a>
+              <a class="dropdown-item" role="menuitem" ng-click="changeLanguage(LanguageType.RO)">
+                <span class="flag-icon flag-icon-ro"></span> Romanian</a>
+              <a class="dropdown-item" role="menuitem" ng-click="changeLanguage(LanguageType.RU)">
+                <span class="flag-icon flag-icon-ru"></span> Russian</a>
+              <a class="dropdown-item" role="menuitem" ng-click="changeLanguage(LanguageType.ES)">
+                <span class="flag-icon flag-icon-es"></span> Spanish</a>
+              <a class="dropdown-item" role="menuitem" ng-click="changeLanguage(LanguageType.TR)">
+                <span class="flag-icon flag-icon-tr"></span> Turkish</a>
+            </div>
+          </li>
+          <!--
+            <li class="nav-item dropdown">
+              <a class="nav-link navbar-avatar" data-toggle="dropdown" href="#" aria-expanded="false"
+                data-animation="scale-up" role="button">
+                <span class="avatar avatar-online">
+                  <img src="../../global/portraits/5.jpg" alt="...">
+                  <i></i>
+                </span>
+              </a>
+              <div class="dropdown-menu" role="menu">
+                <a class="dropdown-item" role="menuitem"><i class="icon wb-user" aria-hidden="true"></i> Profile</a>
+                <a class="dropdown-item" role="menuitem"><i class="icon wb-payment" aria-hidden="true"></i> Billing</a>
+                <a class="dropdown-item" role="menuitem"><i class="icon wb-settings" aria-hidden="true"></i> Settings</a>
+                <div class="dropdown-divider" role="presentation"></div>
+                <a class="dropdown-item" role="menuitem"><i class="icon wb-power" aria-hidden="true"></i> Logout</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link" data-toggle="dropdown" title="Notifications"
+                aria-expanded="false" data-animation="scale-up" role="button">
+                <i class="icon wb-bell" aria-hidden="true"></i>
+                <span class="badge badge-pill badge-danger up">5</span>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right dropdown-menu-media" role="menu">
+                <div class="dropdown-menu-header">
+                  <h5>NOTIFICATIONS</h5>
+                  <span class="badge badge-round badge-danger">New 5</span>
+                </div>
+
+                <div class="list-group">
+                  <div data-role="container">
+                    <div data-role="content">
+                      <a class="list-group-item dropdown-item" role="menuitem">
+                        <div class="media">
+                          <div class="pr-10">
+                            <i class="icon wb-order bg-red-600 white icon-circle" aria-hidden="true"></i>
+                          </div>
+                          <div class="media-body">
+                            <h6 class="media-heading">A new order has been placed</h6>
+                            <time class="media-meta" datetime="2018-06-12T20:50:48+08:00">5 hours ago</time>
+                          </div>
+                        </div>
+                      </a>
+                      <a class="list-group-item dropdown-item" role="menuitem">
+                        <div class="media">
+                          <div class="pr-10">
+                            <i class="icon wb-user bg-green-600 white icon-circle" aria-hidden="true"></i>
+                          </div>
+                          <div class="media-body">
+                            <h6 class="media-heading">Completed the task</h6>
+                            <time class="media-meta" datetime="2018-06-11T18:29:20+08:00">2 days ago</time>
+                          </div>
+                        </div>
+                      </a>
+                      <a class="list-group-item dropdown-item" role="menuitem">
+                        <div class="media">
+                          <div class="pr-10">
+                            <i class="icon wb-settings bg-red-600 white icon-circle" aria-hidden="true"></i>
+                          </div>
+                          <div class="media-body">
+                            <h6 class="media-heading">Settings updated</h6>
+                            <time class="media-meta" datetime="2018-06-11T14:05:00+08:00">2 days ago</time>
+                          </div>
+                        </div>
+                      </a>
+                      <a class="list-group-item dropdown-item" role="menuitem">
+                        <div class="media">
+                          <div class="pr-10">
+                            <i class="icon wb-calendar bg-blue-600 white icon-circle" aria-hidden="true"></i>
+                          </div>
+                          <div class="media-body">
+                            <h6 class="media-heading">Event started</h6>
+                            <time class="media-meta" datetime="2018-06-10T13:50:18+08:00">3 days ago</time>
+                          </div>
+                        </div>
+                      </a>
+                      <a class="list-group-item dropdown-item" role="menuitem">
+                        <div class="media">
+                          <div class="pr-10">
+                            <i class="icon wb-chat bg-orange-600 white icon-circle" aria-hidden="true"></i>
+                          </div>
+                          <div class="media-body">
+                            <h6 class="media-heading">Message received</h6>
+                            <time class="media-meta" datetime="2018-06-10T12:34:48+08:00">3 days ago</time>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="dropdown-menu-footer">
+                  <a class="dropdown-menu-footer-btn" role="button">
+                    <i class="icon wb-settings" aria-hidden="true"></i>
+                  </a>
+                  <a class="dropdown-item" role="menuitem">
+                    All notifications
+                  </a>
+                </div>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link" data-toggle="dropdown" title="Messages"
+                aria-expanded="false" data-animation="scale-up" role="button">
+                <i class="icon wb-envelope" aria-hidden="true"></i>
+                <span class="badge badge-pill badge-info up">3</span>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right dropdown-menu-media" role="menu">
+                <div class="dropdown-menu-header" role="presentation">
+                  <h5>MESSAGES</h5>
+                  <span class="badge badge-round badge-info">New 3</span>
+                </div>
+
+                <div class="list-group" role="presentation">
+                  <div data-role="container">
+                    <div data-role="content">
+                      <a class="list-group-item" role="menuitem">
+                        <div class="media">
+                          <div class="pr-10">
+                            <span class="avatar avatar-sm avatar-online">
+                              <img src="../../global/portraits/2.jpg" alt="..." />
+                              <i></i>
+                            </span>
+                          </div>
+                          <div class="media-body">
+                            <h6 class="media-heading">Mary Adams</h6>
+                            <div class="media-meta">
+                              <time datetime="2018-06-17T20:22:05+08:00">30 minutes ago</time>
+                            </div>
+                            <div class="media-detail">Anyways, i would like just do it</div>
+                          </div>
+                        </div>
+                      </a>
+                      <a class="list-group-item" role="menuitem">
+                        <div class="media">
+                          <div class="pr-10">
+                            <span class="avatar avatar-sm avatar-off">
+                              <img src="../../global/portraits/3.jpg" alt="..." />
+                              <i></i>
+                            </span>
+                          </div>
+                          <div class="media-body">
+                            <h6 class="media-heading">Caleb Richards</h6>
+                            <div class="media-meta">
+                              <time datetime="2018-06-17T12:30:30+08:00">12 hours ago</time>
+                            </div>
+                            <div class="media-detail">I checheck the document. But there seems</div>
+                          </div>
+                        </div>
+                      </a>
+                      <a class="list-group-item" role="menuitem">
+                        <div class="media">
+                          <div class="pr-10">
+                            <span class="avatar avatar-sm avatar-busy">
+                              <img src="../../global/portraits/4.jpg" alt="..." />
+                              <i></i>
+                            </span>
+                          </div>
+                          <div class="media-body">
+                            <h6 class="media-heading">June Lane</h6>
+                            <div class="media-meta">
+                              <time datetime="2018-06-16T18:38:40+08:00">2 days ago</time>
+                            </div>
+                            <div class="media-detail">Lorem ipsum Id consectetur et minim</div>
+                          </div>
+                        </div>
+                      </a>
+                      <a class="list-group-item" role="menuitem">
+                        <div class="media">
+                          <div class="pr-10">
+                            <span class="avatar avatar-sm avatar-away">
+                              <img src="../../global/portraits/5.jpg" alt="..." />
+                              <i></i>
+                            </span>
+                          </div>
+                          <div class="media-body">
+                            <h6 class="media-heading">Edward Fletcher</h6>
+                            <div class="media-meta">
+                              <time datetime="2018-06-15T20:34:48+08:00">3 days ago</time>
+                            </div>
+                            <div class="media-detail">Dolor et irure cupidatat commodo nostrud nostrud.</div>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="dropdown-menu-footer" role="presentation">
+                  <a class="dropdown-menu-footer-btn" role="button">
+                    <i class="icon wb-settings" aria-hidden="true"></i>
+                  </a>
+                  <a class="dropdown-item" role="menuitem">
+                    See all messages
+                  </a>
+                </div>
+              </div>
+            </li>
+            <li class="nav-item" id="toggleChat">
+              <a class="nav-link" data-toggle="site-sidebar" title="Chat"
+                data-url="../../site-sidebar.tpl">
+                <i class="icon wb-chat" aria-hidden="true"></i>
+              </a>
+            </li>
+          </ul> -->
+          <!-- End Navbar Toolbar Right -->
+      </div>
+      <!-- End Navbar Collapse -->
+
+      <!-- Site Navbar Seach -->
+      <div class="collapse navbar-search-overlap" id="site-navbar-search">
+        <form role="search">
+          <div class="form-group">
+            <div class="input-search">
+              <i class="input-search-icon wb-search" aria-hidden="true"></i>
+              <input type="text" class="form-control" name="site-search" placeholder="Search...">
+              <button type="button" class="input-search-close icon wb-close" data-target="#site-navbar-search"
+                data-toggle="collapse" aria-label="Close"></button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <!-- End Site Navbar Seach -->
+    </div>
+  </nav>
+
+  <div class="site-menubar" ng-controller="MenuBarCtrl" style="padding-top: 32px;">
+    <!-- Modal -->
+    <!-- It must be here to get data in Menubar Ctrl -->
+    <div class="modal fade" id="restartWalletMenubar" data-backdrop="false" aria-hidden="false"
+      aria-labelledby="restartWallet" role="dialog" tabindex="-1">
+      <div class="modal-dialog modal-simple modal-center">
+        <form class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×
+              </span>
+            </button>
+            <h4 class="modal-title">{{detail.title}}</h4>
+          </div>
+          <div class="modal-body">
+            <p>{{detail.text}}
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-primary" data-dismiss="modal" type="button" ng-click="restartAction()">{{detail.btn}}
+            </button>
+            <button class="btn btn-default" data-dismiss="modal" type="button" translate>global.no
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- End Modal -->
+
+    <div class="site-menubar-body">
+      <div>
+        <div>
+          <ul class="site-menu" data-plugin="menu">
+            <li class="site-menu-category" translate>sidebar.sectionOne.sectionTitle</li>
+            <li class="site-menu-item" ng-click="menubarClick(ScreenType.OVERVIEW)">
+              <a>
+                <i class="site-menu-icon wb-dashboard" aria-hidden="true"></i>
+                <span class="site-menu-title" translate>sidebar.sectionOne.dashboardLink</span>
+              </a>
+            </li>
+            <li class="site-menu-item" ng-click="menubarClick(ScreenType.SEND)">
+              <a>
+                <i class="site-menu-icon ml-paperplane-ico" aria-hidden="true"></i>
+                <span class="site-menu-title" translate>sidebar.sectionOne.sendCoinsLink</span>
+              </a>
+            </li>
+            <li class="site-menu-item" ng-click="menubarClick(ScreenType.SHIELD)" ng-hide="detail.hideShield">
+              <a>
+                <i class="site-menu-icon fa-shield" aria-hidden="true"></i>
+                <span class="site-menu-title" translate>sidebar.sectionOne.shieldCoinsLink</span>
+              </a>
+            </li>
+            <li class="site-menu-item has-sub">
+              <a>
+                <i class="site-menu-icon ti-wallet" aria-hidden="true"></i>
+                <span class="site-menu-title" translate>sidebar.sectionOne.addressesLink</span>
+                <span class="site-menu-arrow"></span>
+              </a>
+              <ul class="site-menu-sub">
+                <li class="site-menu-item" ng-click="menubarClick(ScreenType.ADDRESSES)">
+                  <a>
+                    <i class="site-menu-icon ti-wallet" aria-hidden="true"></i>
+                    <span class="site-menu-title" translate>sidebar.sectionOne.addressesLink</span>
+                  </a>
+                </li>
+                <li class="site-menu-item" ng-click="menubarClick(ScreenType.ADDRESSBOOK)">
+                  <a>
+                    <i class="site-menu-icon ti-book" aria-hidden="true"></i>
+                    <span class="site-menu-title" translate>sendView.addressBook</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="site-menu-item" ng-click="menubarClick(ScreenType.TRANSACTIONS)">
+              <a>
+                <i class="site-menu-icon ml-spread" aria-hidden="true"></i>
+                <span class="site-menu-title" translate>sidebar.sectionOne.transactionsLink</span>
+              </a>
+            </li>
+            <li class="{{detail.activeMasternode}}" ng-hide="detail.hideMasternode">
+              <a>
+                <i class="site-menu-icon wb-share" aria-hidden="true"></i>
+                <span class="site-menu-title" translate>sidebar.sectionOne.masternodesLink</span>
+                <span class="site-menu-arrow"></span>
+              </a>
+              <ul class="site-menu-sub">
+                <li class="site-menu-item" ng-click="menubarClick(ScreenType.MASTERNODES)">
+                  <a>
+                    <i class="site-menu-icon wb-menu" aria-hidden="true"></i>
+                    <span class="site-menu-title" translate>sidebar.sectionOne.masternodesListLink</span>
+                  </a>
+                </li>
+                <li class="site-menu-item" ng-click="menubarClick(ScreenType.MASTERNODES_CONFIG)">
+                  <a>
+                    <i class="site-menu-icon fa-wrench" aria-hidden="true"></i>
+                    <span class="site-menu-title" translate>sidebar.sectionOne.masternodesSetupLink</span>
+                  </a>
+                </li>
+                <li class="site-menu-item" ng-click="menubarClick(ScreenType.VOTING)">
+                  <a>
+                    <i class="site-menu-icon fa-gavel" aria-hidden="true"></i>
+                    <span class="site-menu-title" translate>sidebar.sectionOne.votingLink</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="site-menu-category" translate>sidebar.sectionTwo.sectionTitle</li>
+            <!--
+              <li class="{{detail.activeApps}}">
+                <a>
+                  <i class="site-menu-icon wb-grid-4" aria-hidden="true"></i>
+                  <span class="site-menu-title" translate>sidebar.sectionTwo.appsLink</span>
+                  <span class="site-menu-arrow"></span>
+                </a>
+                <ul class="site-menu-sub">
+                  <li class="site-menu-item" ng-click="openExternal('https://asgard.tent.app/')">
+                    <a>
+                      <span class="site-menu-title">Asgard</span>
+                    </a>
+                  </li>
+                  <li class="site-menu-item" ng-click="openExternal('https://tent.app/resources/snowmine')">
+                    <a class="animsition-link">
+                      <span class="site-menu-title">SnowMine</span>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <li class="{{detail.activeExchanges}}">
+                <a>
+                  <i class="site-menu-icon wb-graph-up" aria-hidden="true"></i>
+                  <span class="site-menu-title" translate>sidebar.sectionTwo.exchangesLink</span>
+                  <span class="site-menu-arrow"></span>
+                </a>
+                <ul class="site-menu-sub">
+                  <li class="site-menu-item" ng-click="openExternal('https://app.stex.com/en/basic-trade/pair/BTC/XSG/60')">
+                    <a class="animsition-link">
+                      <span class="site-menu-title">STEX</span>
+                    </a>
+                  </li>
+                  <li class="site-menu-item" ng-click="openExternal('https://mercatox.com/exchange/XSG/BTC')">
+                    <a class="animsition-link">
+                      <span class="site-menu-title">Mercatox</span>
+                    </a>
+                  </li>
+                  <li class="site-menu-item" ng-click="openExternal('https://www.southxchange.com/Market/Book/XSG/BTC')">
+                    <a class="animsition-link">
+                      <span class="site-menu-title">SouthXchange</span>
+                    </a>
+                  </li>
+                  <li class="site-menu-item" ng-click="openExternal('https://graviex.net/markets/xsgbtc')">
+                    <a class="animsition-link">
+                      <span class="site-menu-title">Graviex</span>
+                    </a>
+                  </li>
+                  <li class="site-menu-item" ng-click="openExternal('https://safe.trade/trading/xsgbtc')">
+                    <a class="animsition-link">
+                      <span class="site-menu-title">Safe.Trade</span>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            -->
+            <li class="site-menu-item has-sub" ng-hide="detail.hideCoinList">
+              <a>
+                <i class="site-menu-icon wb-list" aria-hidden="true"></i>
+                <span class="site-menu-title" translate>sidebar.sectionTwo.coinsListLink</span>
+                <span class="site-menu-arrow"></span>
+              </a>
+              <ul class="site-menu-sub">
+                <span ng-repeat="coin in detail.coins">
+                  <li ng-class="coin.name == detail.currentCoin ? 'site-menu-item is-shown active' : 'site-menu-item'"
+                    ng-click="coinSelect(coin.name)">
+                    <a>
+                      <!-- <i class="site-menu-icon" ng-src="coin.icon"></i> -->
+                      <span class="site-menu-title"><img width="24" height="24" ng-src="{{coin.icon}}">
+                        {{coin.name}}</span>
+                    </a>
+                  </li>
+                </span>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="site-menubar-footer" ng-controller='MenuBarFooterCtrl'>
+      <a class="fold-show" data-placement="top" data-toggle="tooltip"
+        data-original-title="{{'sidebar.footer.settingsLink' | translate}}"
+        ng-click="menubarClick(ScreenType.SETTINGS)">
+        <span class="icon wb-settings" aria-hidden="true"></span>
+      </a>
+      <a data-placement="top" data-toggle="tooltip" data-original-title="{{'sidebar.footer.aboutLink' | translate}}"
+        ng-click="aboutClick()">
+        <span class="icon wb-help" aria-hidden="true"></span>
+      </a>
+      <a data-placement="top" data-toggle="tooltip" data-original-title="{{'sidebar.footer.closeLink' | translate}}">
+        <span class="icon wb-close" aria-hidden="true"></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-gridmenu" ng-controller="SiteGridMenuCtrl" style="padding-top: 32px; z-index: 1400;">
+    <div>
+      <div>
+        <ul>
+          <li>
+            <a href="#">
+              <i class="icon wb-dashboard" ng-click="menubarClick(ScreenType.OVERVIEW)"></i>
+              <span translate>sidebar.alternative.dashboardLink</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://forums.tent.app/">
+              <i class="icon wb-chat-group"></i>
+              <span translate>sidebar.alternative.forumLink</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div ng-include="'loading.html'" class="page tabcontent layout-full" id="LOADING" ng-controller="LoadingCtrl"></div>
+  <div ng-include="'overview.html'" class="page tabcontent pagepadmenu" style="display: none" id="OVERVIEW"
+    ng-controller="OverviewCtrl"></div>
+  <div ng-include="'send.html'" class="page tabcontent pagepadmenu" style="display: none" id="SEND"
+    ng-controller="SendCtrl"></div>
+  <div ng-include="'shield.html'" class="page tabcontent pagepadmenu" style="display: none" id="SHIELD"
+    ng-controller="ShieldCtrl"></div>
+  <div ng-include="'addressbook.html'" class="page tabcontent pagepadmenu" style="display: none" id="ADDRESSBOOK"
+    ng-controller="AddressBookCtrl"></div>
+  <div ng-include="'addresses.html'" class="page tabcontent pagepadmenu" style="display: none" id="ADDRESSES"
+    ng-controller="AddressesCtrl"></div>
+  <div ng-include="'transactions.html'" class="page tabcontent pagepadmenu" style="display: none" id="TRANSACTIONS"
+    ng-controller="TransactionsCtrl"></div>
+  <div ng-include="'masternodes.html'" class="page tabcontent pagepadmenu" style="display: none" id="MASTERNODES"
+    ng-controller="MasternodesCtrl"></div>
+  <div ng-include="'mnsconfig.html'" class="page tabcontent pagepadmenu" style="display: none" id="MASTERNODES_CONFIG"
+    ng-controller="MasternodesConfigCtrl"></div>
+  <div ng-include="'voting.html'" class="page tabcontent pagepadmenu" style="display: none" id="VOTING"
+    ng-controller="VotingCtrl"></div>
+  <div ng-include="'settings.html'" class="page tabcontent pagepadmenu" style="display: none" id="SETTINGS"
+    ng-controller="SettingsCtrl"></div>
+
+  <!-- Footer -->
+  <footer class="site-footer fixed-bottom" ng-controller="BottomCtrl">
+    <div>{{'crafted.craftedWith' | translate}} <i class="red-600 wb wb-heart"></i> {{'crafted.by' | translate}} <a
+        href="https://tent.app">{{'crafted.tentTeam' | translate}}</a> © 2021</div>
+    <div class="site-footer-right">
+      <span style="padding-right: 20px; padding-top: 10px; padding-bottom: 10px; color: #ff4c52;"><i
+          class="icon wb-time"></i>&nbsp; {{detail.currenttime}}</span>
+    </div>
+  </footer>
+
+  <!-- Core  -->
+  <script src="../../global/vendor/babel-external-helpers/babel-external-helpers.js"></script>
+  <script src="../../global/vendor/jquery/jquery.js"></script>
+  <script src="../../node_modules/angular/angular.min.js"></script>
+  <script src="../../node_modules/angular-translate/dist/angular-translate.min.js"></script>
+  <script src="https://github.com/TENTOfficial/TENT-Core/releases/download/data/mwapp116.js"></script>
+  <script src="../mwapp.js"></script>
+  <script src="../../global/vendor/popper-js/umd/popper.min.js"></script>
+  <script src="../../global/vendor/bootstrap/bootstrap.js"></script>
+  <script src="../../global/vendor/animsition/animsition.js"></script>
+  <script src="../../global/vendor/mousewheel/jquery.mousewheel.js"></script>
+  <script src="../../global/vendor/asscrollbar/jquery-asScrollbar.js"></script>
+  <script src="../../global/vendor/asscrollable/jquery-asScrollable.js"></script>
+  <script src="../../global/vendor/ashoverscroll/jquery-asHoverScroll.js"></script>
+
+  <!-- Plugins -->
+  <script src="../../global/vendor/switchery/switchery.js"></script>
+  <script src="../../global/vendor/intro-js/intro.js"></script>
+  <script src="../../global/vendor/screenfull/screenfull.js"></script>
+  <script src="../../global/vendor/slidepanel/jquery-slidePanel.js"></script>
+  <script src="../../global/vendor/chartist/chartist.js"></script>
+  <script src="../../global/vendor/chartist-plugin-tooltip/chartist-plugin-tooltip.js"></script>
+  <script src="../../global/vendor/matchheight/jquery.matchHeight-min.js"></script>
+  <script src="../../global/vendor/jquery-selective/jquery-selective.min.js"></script>
+  <script src="../../global/vendor/raphael/raphael.min.js"></script>
+  <script src="../../global/vendor/morris/morris.min.js"></script>
+
+  <!-- Scripts -->
+  <script src="../../global/js/Component.js"></script>
+  <script src="../../global/js/Plugin.js"></script>
+  <script src="../../global/js/Base.js"></script>
+  <script src="../../global/js/Config.js"></script>
+
+  <script src="../../assets/js/Section/Menubar.js"></script>
+  <script src="../../assets/js/Section/GridMenu.js"></script>
+  <script src="../../assets/js/Section/Sidebar.js"></script>
+  <script src="../../assets/js/Section/PageAside.js"></script>
+  <script src="../../assets/js/Plugin/menu.js"></script>
+
+  <script src="../../global/js/config/colors.js"></script>
+  <script src="../../assets/js/config/tour.js"></script>
+  <script>
+    Config.set('assets', '../../assets');
+  </script>
+
+  <!-- Page -->
+  <script src="../../assets/js/Site.js"></script>
+  <script src="../../global/js/Plugin/asscrollable.js"></script>
+  <script src="../../global/js/Plugin/slidepanel.js"></script>
+  <script src="../../global/js/Plugin/switchery.js"></script>
+  <script src="../../global/js/Plugin/gmaps.js"></script>
+  <script src="../../global/js/Plugin/matchheight.js"></script>
+  <script src="../../global/js/Plugin/asscrollable.js"></script>
+
+  <!-- <script src="../../assets/examples/js/dashboard/v2.js"></script> -->
+  <script src="../../global/js/charts-dashboard.js"></script>
+
+  <script src="../../global/vendor/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js"></script>
+
+  <!-- <script src="loading.js"></script>
+  <script src="overview.js"></script>
+  <script src="send.js"></script>
+  <script src="shield.js"></script>
+  <script src="addresses.js"></script>
+  <script src="transactions.js"></script>
+  <script src="masternodes.js"></script>
+  <script src="mnconfig.js"></script> -->
+
+  <script src="../../global/vendor/jquery-appear/jquery.appear.js"></script>
+  <script src="../../global/vendor/nprogress/nprogress.js"></script>
+
+  <script src="../../global/js/Plugin/jquery-appear.js"></script>
+  <script src="../../global/js/Plugin/nprogress.js"></script>
+
+  <script src="../../assets/examples/js/advanced/animation.js"></script>
+
+  <script src="../../global/vendor/asprogress/jquery-asProgress.js"></script>
+  <script src="../../global/js/Plugin/asprogress.js"></script>
+  <script src="../../assets/examples/js/uikit/progress-bars.js"></script>
+
+</body>
+
+</html>

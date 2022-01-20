@@ -1,0 +1,314 @@
+<!-- Modal Alert-->
+<div class="modal fade" id="modalMenuBarAlert" data-backdrop="static" aria-hidden="true" aria-labelledby="modalMenuBarAlert"
+role="dialog" tabindex="-1">
+  <div class="modal-dialog modal-simple modal-center">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title">{{'global.alert' | translate}}!!!</h4>
+      </div>
+      <div class="modal-body">
+        <p>{{'loadingView.loadingWallet' | translate}}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">{{'global.close' | translate}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modal -->
+
+<!-- Modal Alert-->
+<div class="modal fade" id="modalLoadingAlert" data-backdrop="static" aria-hidden="true" aria-labelledby="modalLoadingAlert"
+role="dialog" tabindex="-1">
+  <div class="modal-dialog modal-simple modal-center">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title">{{detail.title}}</h4>
+      </div>
+      <div class="modal-body">
+        <p>{{detail.text}}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="restartAction()">{{'global.close' | translate}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modal -->
+
+<!-- Modal Alert-->
+<div class="modal fade" id="modalLoadingDaemon" data-backdrop="static" aria-hidden="true"
+role="dialog" tabindex="-1">
+  <div class="modal-dialog modal-simple modal-center">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title">{{detail.title}}</h4>
+      </div>
+      <div class="modal-body">
+          <textarea class="form-control" rows="7" ng-model="detail.text" readonly></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="daemonAction()">{{'global.close' | translate}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modal -->
+
+<!-- Modal Popup-->
+<div class="modal fade" id="modalPopup" data-backdrop="static" aria-hidden="true"
+role="dialog" tabindex="-1">
+  <div class="modal-dialog modal-simple modal-center">
+    <div class="modal-content" style="position: relative;">
+      <a ng-href="{{detail.popup.redirectUrl}}" data-dismiss="modal" ng-click="closePopup()">
+        <img class="img-responsive" ng-src="{{detail.popup.imgUrl}}" style="max-width:600px;">
+      </a>
+      <button type="button" class="fas fa-window-close" data-dismiss="modal" aria-label="Close" ng-click="closePopup()" style="position: absolute; right: 0px;"></button>
+    </div>
+  </div>
+</div>
+<!-- End Modal -->
+
+<!-- Modal Alert-->
+<div class="modal fade" id="modalDependencies" aria-hidden="true" aria-labelledby="modalDependencies" data-backdrop="static" data-keyboard="false" role="dialog" tabindex="-1">
+  <div class="modal-dialog modal-simple modal-center">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title">{{detail.title}}</h4>
+      </div>
+      <div class="modal-body">
+        <p>{{detail.text}}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" ng-click="dependenciesAction()" data-dismiss="modal">{{'global.close' | translate}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="modalLoadingNewVersion" aria-hidden="false" aria-labelledby="modalLoadingNewVersionLabel" data-backdrop="static" data-keyboard="false" role="dialog" tabindex="-1">
+  <div class="modal-dialog modal-simple modal-center">
+    <form class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title" id="modalLoadingNewVersionLabel">{{detail.title}}</h4>
+      </div>
+      <div class="modal-body">
+          <textarea class="form-control" rows="7" ng-model="detail.text" readonly></textarea>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-success" data-dismiss="modal" data-toggle="modal" type="button" ng-click="btnAction()">{{detail.btnText}}</button>
+        <button class="btn btn-default" data-dismiss="modal" data-toggle="modal" type="button" ng-click="cancelAction()">{{'global.cancel' | translate}}</button>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- End Modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="modalUbuntuVersion" aria-hidden="false" aria-labelledby="modalUbuntuVersion" role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-simple modal-center">
+    <form class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">{{detail.title}}</h4>
+      </div>
+      <div class="modal-body">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label class="form-control-label" for="inputUserNameOne">{{'loadingView.selectLinuxVer' | translate}}</label>
+              <select class="form-control" data-plugin="select2" ng-model="detail.linuxVersion">
+                  <option ng-repeat="os in oss">{{ os }}</option>
+              </select>
+              <p class="text-danger" ng-hide="detail.noiticeSelectUbuntu" for="inputUserNameOne">* {{'loadingView.selectOneVer' | translate}}</p>
+            </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <div class="col-md-12 float-right">
+          <button class="btn btn-primary" type="button" ng-click="selectLinux(detail.linuxVersion)">{{detail.btnText}}</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- End Modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="selectCoinAlert" aria-hidden="false" aria-labelledby="modalUbuntuVersion" role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-simple modal-center">
+      <form class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">{{detail.title}}</h4>
+        </div>
+        <div class="modal-body">
+            <div class="col-md-12 center">
+              <span ng-repeat="coin in detail.coins">
+                <button class="btn btn-lg text-center"  data-dismiss="modal" ng-style="{'background-color': coin.name == detail.currentCoin ? 'powderblue' : 'transparent'}" ng-click="selectCoin(coin.name)"><img width="32" ng-src="{{coin.icon}}"><br><small>{{coin.name}}</small></button>
+              </span>
+            </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- End Modal -->
+
+  <!-- Modal -->
+<div class="modal fade" id="autoDownloadDaemonModal" aria-hidden="false" role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-simple modal-center">
+    <form class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">{{detail.title}}</h4>
+      </div>
+      <div class="modal-body">
+        <p>{{detail.text}}</p>
+        <div class="col-md-12 center">
+          <button class="btn btn-success text-center" data-dismiss="modal" ng-click="autoDownload()">{{'global.yesRecommended' | translate}}</button>
+          <button class="btn text-center" data-dismiss="modal" ng-click="noAutoDownload()">{{'global.no' | translate}}</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- End Modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="customDataDir" aria-hidden="false" role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-simple modal-center">
+    <form class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">{{detail.title}}</h4>
+      </div>
+      <div class="modal-body">
+        <p>{{detail.text}}</p>
+        <div class="col-md-12 center">
+          <button class="btn btn-success text-center" data-dismiss="modal" ng-click="noCustomData()">{{'global.yes' | translate}}</button>
+          <button class="btn text-center" data-dismiss="modal" ng-click="customData()">{{'global.no' | translate}}</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- End Modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="masternodeOption" aria-hidden="false" role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-simple modal-center">
+      <form class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">{{detail.title}}</h4>
+        </div>
+        <div class="modal-body">
+          <p>{{detail.text}}</p>
+          <div class="col-md-12 center">
+            <button class="btn text-center" data-dismiss="modal" ng-click="indexData()">{{'global.yes' | translate}}</button>
+            <button class="btn text-center" data-dismiss="modal" ng-click="noindexData()">{{'global.no' | translate}}</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- End Modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="autoDownloadBlockchainModal" aria-hidden="false" role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-simple modal-center">
+    <form class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">{{detail.title}}</h4>
+      </div>
+      <div class="modal-body">
+        <p>{{detail.text}}</p>
+        <div class="col-md-12 center">
+          <button class="btn btn-success text-center" data-dismiss="modal" ng-click="autoDownloadBlockchain()">{{'global.yesRecommended' | translate}}</button>
+          <button class="btn text-center" data-dismiss="modal" ng-click="noAutoDownloadBlockchain()">{{'global.no' | translate}}</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- End Modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="modalDaemonLocation" aria-hidden="false" role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-simple modal-center">
+    <form class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="importPrivatekeysLabel">{{detail.title}}</h4>
+      </div>
+      <div class="modal-body">
+        <div class="col-md-12">
+            <div class="form-group row">
+              <div class="col-md-4">
+                <button class="btn btn-default btn-block" type="button" ng-click="openDaemon()" ng-disabled="detail.disableSelectDaemon">{{'loadingView.selectDaemon' | translate}}</button>
+              </div>
+              <div class="col-md-8">
+                <input class="form-control" id="daemon-file" name="name" autocomplete="off" type="text" ng-model="detail.daemonLocation" readonly>
+              </div>
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" data-dismiss="modal" data-backdrop="static" class="btn btn-success" ng-click="applyLocationAction()" ng-disabled="detail.disableSelectDaemon">{{'global.continue' | translate}}</button>
+        <button type="button" data-dismiss="modal" data-backdrop="static" class="btn btn-primary" ng-click="cancelLocationAction()">{{'global.back' | translate}}</button>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- End Modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="modalDataLocation" aria-hidden="false" role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-simple modal-center">
+    <form class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="importPrivatekeysLabel">{{detail.title}}</h4>
+      </div>
+      <div class="modal-body">
+        <div class="col-md-12">
+            <div class="form-group row">
+              <div class="col-md-4">
+                <button class="btn btn-default btn-block" type="button" ng-click="openDataDir()" ng-disabled="detail.disableSelectDirectory">{{'loadingView.selectDir' | translate}}</button>
+              </div>
+              <div class="col-md-8">
+                <input class="form-control" id="data-dir" name="name" autocomplete="off" type="text" ng-model="detail.dataLocation" readonly>
+              </div>
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" data-dismiss="modal" data-backdrop="static" class="btn btn-success" ng-click="applyCustomDataAction()" ng-disabled="detail.disableSelectDirectory">{{'global.continue' | translate}}</button>
+        <button type="button" data-dismiss="modal" data-backdrop="static" class="btn btn-primary" ng-click="canceCustomDataAction()">{{'global.back' | translate}}</button>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- End Modal -->
+
+<div class="vertical-align text-center bg" ng-style="{'background-image': 'url(' + detail.background + ')', 'background-repeat': 'no-repeat'}" data-animsition-in="fade-in" data-animsition-out="fade-out">
+  <div class="page-content vertical-align-middle" style="padding-top: 205px; margin-left: 0px;">
+    <div class="loader vertical-align-middle loader-bounce"></div>
+    <h2 class="white" style="padding-top: 10px;">{{'loadingView.amazing' | translate}}...</h2>
+    <p class="white">{{currentProcess}}</p>
+    <div class="progress vertical-align-middle" style="width: 100%" ng-hide="detail.disableProgressbar">
+      <div class="progress-bar progress-bar-success progress-bar-striped active" title="{{detail.width}}" aria-valuenow="{{detail.progress}}" aria-valuemin="0"
+        aria-valuemax="100" ng-style="{'width': detail.width}" role="progressbar">
+      </div>
+    </div>
+  </div>
+</div>

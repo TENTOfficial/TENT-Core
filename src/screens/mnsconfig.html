@@ -1,0 +1,133 @@
+<div class="page-content">
+  <!-- Modal Alert-->
+  <div class="modal fade" id="modalMasternodeConfigAlert" data-backdrop="static" aria-hidden="true" aria-labelledby="modalMasternodeConfigAlert"
+  role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-simple modal-center">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+          <h4 class="modal-title">{{detail.title}}</h4>
+        </div>
+        <div class="modal-body">
+          <p>{{detail.text}}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">{{'global.close' | translate}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Modal -->
+
+  <!-- Modal -->
+  <div class="modal fade" id="modalMasternodeConfigConfirmation" data-backdrop="static" aria-hidden="false" aria-labelledby="modalMasternodeConfigConfirmationLabel"
+  role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-simple modal-center">
+      <form class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+          <h4 class="modal-title" id="modalMasternodeConfigConfirmationLabel">{{detail.title}}</h4>
+        </div>
+        <div class="modal-body">
+          <p>{{detail.text}}</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" data-dismiss="modal" type="button" ng-click="restartAction()">{{'global.restart' | translate}}</button>
+          <button class="btn btn-default" data-dismiss="modal" type="button">{{'global.close' | translate}}</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- End Modal -->
+
+   <!-- Panel Setup Masternode -->
+   <div class="panel">
+    <div class="panel-body container-fluid">
+      <div class="example row row-lg">
+        <div class="col-12 text-right">
+          <button type="button" class="btn btn-success" ng-click="getPrivKey()" ng-disabled="detail.btnDisabled"><i class="icon fa-key" aria-hidden="true"></i> {{'mnsconfigView.getPrivKey' | translate}}</button>
+          <button type="button" class="btn btn-success" ng-click="generate()" ng-disabled="detail.btnDisabled"><i class="icon wb-hammer" aria-hidden="true"></i> {{'mnsconfigView.generateMnData' | translate}}</button>
+        </div>
+      </div>
+      <div class="example row row-lg">
+        <div class="col-12">
+          <form class="form-horizontal">
+            <div class="form-group row">
+              <label class="col-md-2 form-control-label">{{'masternodesView.operations.aliasName' | translate}} </label>
+              <div class="col-md-10">
+                <input class="form-control" name="name" autocomplete="off" type="text" ng-model="detail.alias">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-2 form-control-label">{{'masternodesView.operations.vpsIp' | translate}} </label>
+              <div class="col-md-10">
+                <input class="form-control" name="name" autocomplete="off" type="text" ng-model="detail.ip">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-2 form-control-label">{{'masternodesView.operations.privateKey' | translate}} </label>
+              <div class="col-md-10">
+                <input class="form-control" name="name" autocomplete="off" type="text" ng-model="detail.privkey">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-2 form-control-label">{{'masternodesView.operations.txId' | translate}} </label>
+              <div class="col-md-10">
+                <input class="form-control" name="name" autocomplete="off" type="text" ng-model="detail.transactionID">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-2 form-control-label">{{'masternodesView.operations.index' | translate}} </label>
+              <div class="col-md-10">
+                <input class="form-control" name="name" autocomplete="off" type="number" ng-model="detail.index">
+              </div>
+            </div>
+            <div class="form-group text-right">
+              <button type="button" class="btn btn-primary" ng-click="setupMasternode()">{{'global.setup' | translate}}</button>
+              <button type="reset" class="btn btn-default btn-outline">{{'global.reset' | translate}}</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  <!-- End Setup Masternode -->
+  </div>
+  
+  <!-- Panel Masternode Data -->
+  <div class="panel" ng-show="detail.showNewMasternodeData">
+    <div class="panel-heading">
+      <h3 class="panel-title">{{'mnsconfigView.newMnData' | translate}}</h3>
+    </div>
+    <div class="panel-body container-fluid">
+      <div class="example row row-lg">
+        <div class="col-12">
+          <div class="table-responsive">
+            <table class="table table-hover" data-plugin="selectable" data-row-selectable="true" style="max-height: 200px; overflow: auto">
+              <thead>
+                <tr>
+                  <th style="width: 3%;">#</th>
+                  <th style="width: 36%;">{{'masternodesView.operations.privateKey' | translate}}</th>
+                  <th style="width: 46%;">{{'masternodesView.operations.txId' | translate}}</th>
+                  <th style="width: 15%;">{{'masternodesView.operations.index' | translate}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="data in detail.mnData">
+                  <td>{{data.no}}</td>
+                  <td>{{data.privkey}}</td>
+                  <td>{{data.txhash}}</td>
+                  <td>{{data.outidx}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

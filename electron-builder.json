@@ -1,0 +1,48 @@
+{
+    "appId": "tent.core",
+    "productName": "TENTCore",
+    "files": [
+        "src/**/*",
+        "global/**/*",
+        "assets/**/*",
+        "!README.md", 
+        "!.gitignore", 
+        "!src/api", 
+        "!src/screens/index.js", 
+        "!src/main.js", 
+        "!src/screens/addresses.js", 
+        "!src/screens/loading.js", 
+        "!src/screens/endscreen.js", 
+        "!src/screens/masternodes.js", 
+        "!src/screens/mnsconfig.js", 
+        "!src/screens/overview.js", 
+        "!src/screens/send.js", 
+        "!src/screens/shield.js", 
+        "!src/screens/transactions.js", 
+        "!src/screens/settings.js", 
+        "!src/screens/services.js", 
+        "!src/html", 
+        "!src/mwapp.js", 
+        "!src/renderer.js", 
+        "!Gruntfile.js", 
+        "!src/screens/splashscreen.js", 
+        "!src/screens/debuggingscreen.js", 
+        "!src/screens/addressbook.js", 
+        "!src/screens/voting.js", 
+        "!src/addressbook.js", 
+        "!src/voting.js"
+    ],
+    "directories": {
+        "output": "release-builds/electron-builder",
+        "buildResources": "assets"
+    },
+
+    "asar": true,
+    "linux": {
+        "target": [
+            "AppImage"
+        ],
+        "icon": "assets/icons/linux/icon.png"
+    }
+}
+

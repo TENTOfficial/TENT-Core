@@ -1,0 +1,323 @@
+<div class="page-content" style="position: relative;">
+
+  <!-- Modal -->
+  <div class="modal fade" id="modalQrCode" data-backdrop="true" data-keyboard="false" aria-hidden="true" aria-labelledby="modalQrCode"
+  role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-simple modal-center">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+              <h5 class="modal-title">{{detail.title}}</h5>
+              <div class="col-md-12">
+                  <canvas class="align-middle" id="qrcode"></canvas>
+              </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" data-dismiss="modal" class="btn btn-default btn-outline">{{'global.close' | translate}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Modal -->
+
+  <!-- Modal Alert-->
+  <div class="modal fade" id="modalAddressNoti" data-backdrop="static" aria-hidden="true" aria-labelledby="modalAddressNoti"
+  role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-simple modal-center">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+          <h4 class="modal-title">{{detail.title}}</h4>
+        </div>
+        <div class="modal-body">
+          <p>{{detail.alertText}}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="closeAlertAction()">{{'global.close' | translate}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Modal -->
+
+  <!-- Modal Alert-->
+  <div class="modal fade" id="modalAddressNewAddress" data-backdrop="static" aria-hidden="true" aria-labelledby="modalAddressNewAddress"
+  role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-simple modal-center">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+          <h4 class="modal-title">{{detail.title}}</h4>
+        </div>
+        <div class="modal-body">
+          <input class="form-control" name="name" autocomplete="off" type="text" placeholder="{{'addressesView.placeholder.createAddress' | translate}}" ng-model="detail.addressName" ng-keyup="createAddress($event)">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="createAddress()">{{'addressesView.modalCreateButton' | translate}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Modal -->
+
+  <!-- Modal Alert-->
+  <div class="modal fade" id="modalAddressError" data-backdrop="static" aria-hidden="true" aria-labelledby="modalAddressNoti"
+  role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-simple modal-center">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+          <h4 class="modal-title">{{detail.title}}</h4>
+        </div>
+        <div class="modal-body">
+            <div class="col-xl-12 form-group">
+              <textarea class="form-control" rows="7" ng-model="detail.alertText" readonly></textarea>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="closeAlertAction()">{{'global.close' | translate}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Modal -->
+
+  <!-- Modal -->
+  <div class="modal fade" id="privKeyModal" data-backdrop="static" data-keyboard="false" aria-hidden="true" aria-labelledby="privKeyModal"
+  role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-simple modal-center">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+          <h4 class="modal-title">{{'addressesView.privatekeysModalTitle' | translate}}</h4>
+        </div>
+        <div class="modal-body" style="white-space: wrap;">
+            <textarea class="form-control" rows="7" ng-model="detail.privatekeys" readonly></textarea>
+        </div>
+        <div class="modal-footer">
+          <!-- <button type="button" class="btn btn-default" data-dismiss="modal"><i class="icon wb-print" aria-hidden="true"></i> Export</button> -->
+          <button type="button" class="btn btn-default" data-dismiss="modal"> {{'global.close' | translate}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Modal -->
+
+  <!-- Modal -->
+  <div class="modal fade" id="importPrivatekeys" data-backdrop="static" data-keyboard="false" aria-hidden="false" aria-labelledby="importPrivatekeysLabel"
+  role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-simple modal-center">
+      <form class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+          <h4 class="modal-title" id="importPrivatekeysLabel">{{'addressesView.modalImportButton' | translate}} {{'addressesView.privatekeysModalTitle' | translate}}</h4>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-xl-12 form-group">
+              <textarea class="form-control" rows="5" placeholder="{{'addressesView.placeholder.importPrivatekeys' | translate}}" ng-model="detail.privKeysImport"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" data-dismiss="modal" type="button" ng-click="importAction()">{{'addressesView.modalImportButton' | translate}}</button>
+          <button class="btn btn-default" data-dismiss="modal" type="button"> {{'global.close' | translate}}</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- End Modal -->
+
+  <!-- Modal -->
+  <div class="modal fade" id="shieldAllConfirmationAddr" data-backdrop="static" aria-hidden="false" role="dialog" tabindex="-1">
+      <div class="modal-dialog modal-simple modal-center">
+        <form class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title">{{detail.title}}</h4>
+          </div>
+          <div class="modal-body">
+            <p>{{detail.alertText}}</p>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-success" data-dismiss="modal" type="button" ng-click="shieldAllAction()">{{'global.ok' | translate}}</button>
+            <button class="btn btn-default" data-dismiss="modal" type="button">{{'global.cancel' | translate}}</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- End Modal -->
+
+  <!-- Modal -->
+  <div class="modal fade" id="modalNewAddressBook" data-backdrop="static" data-keyboard="false"  aria-hidden="false" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-simple modal-center">
+      <form class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+          <h4 class="modal-title">{{detail.title}}</h4>
+        </div>
+        <div class="modal-body">
+          <div class="col-md-12">
+            <div class="form-horizontal">
+              <div class="form-group row">
+                <label class="col-md-2 form-control-label">{{'addressesView.table.name' | translate}}</label>
+                <div class="col-md-10">
+                  <input class="form-control" name="name" autocomplete="off" type="text" ng-model="detail.current.name" ng-disabled="detail.current.readonly">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-2 form-control-label">{{'addressesView.table.address' | translate}}</label>
+                <div class="col-md-10">
+                  <input class="form-control" name="name" autocomplete="off" type="text" ng-model="detail.current.address"ng-disabled="detail.current.readonly">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" data-dismiss="modal" class="btn btn-primary" ng-click="createAction(detail.current.name, detail.current.address)" ng-show="!detail.current.readonly">{{'global.apply' | translate}}</button>
+          <button type="button" data-dismiss="modal" class="btn btn-default btn-outline">{{detail.current.readonly == true ? ('global.close' | translate) : ('global.cancel' | translate)}}</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- End Modal -->
+
+  <!-- Modal -->
+  <div class="modal fade" id="modalEditAddressBook" data-backdrop="static" data-keyboard="false"  aria-hidden="false" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-simple modal-center">
+      <form class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+          <h4 class="modal-title">{{detail.title}}</h4>
+        </div>
+        <div class="modal-body">
+          <div class="table-responsive" style="max-height:330px;">
+            <table class="table" style="overflow: auto">
+              <thead>
+                <tr>
+                  <th style="width: 8%;"></th>
+                  <th style="width: 30%;">{{'addressesView.table.name' | translate}}</th>
+                  <th style="width: 62%;max-width: 62%;">{{'addressesView.table.address' | translate}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="b in detail.bookKeys">
+                  <td class="align-middle">
+                    <button type="button" class="btn btn-pure btn-default icon wb-minus-circle" ng-click="deleteBook(detail.book[b], b)" style="padding: 0 0 0 10px;"></button>
+                  </td>
+                  <td><input class="form-control" style="width: 100px;" name="name" autocomplete="off" type="text" ng-model="detail.book[b]" ng-change="bookChange(detail.book[b], b)"></td>
+                  <td class="align-middle" style="width: 62%;max-width: 62%;">{{b}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" data-dismiss="modal" class="btn btn-primary" ng-click="editAddressBookAction()">{{'global.apply' | translate}}</button>
+          <button type="button" data-dismiss="modal" class="btn btn-default btn-outline" ng-click="cancelAddressBookAction()">{{'global.cancel' | translate}}</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- End Modal -->
+
+  <!-- Panel Wallet Address -->
+  <div class="panel">
+    <div class="panel-body container-fluid">
+      <div class="example row row-lg">
+        <div class="col-12 text-right">
+          <button type="button" class="btn btn-dark" ng-click="importPrivKey()" ng-disabled="!detail.enableImportKey"><i class="icon wb-add-file" aria-hidden="true"></i> {{detail.importPrivKeyText}}</button>
+          <button type="button" class="btn btn-default" ng-show="detail.showGetPrivKey" ng-disabled="!detail.enableGetPrivKey" ng-click="getPrivKey()"><i class="icon wb-print" aria-hidden="true"></i> {{detail.privKeyText}}</button>
+          <div class="btn-group">
+            <button type="button" class="btn btn-success dropdown-toggle" id="newAddressDropdown"
+              data-toggle="dropdown" aria-expanded="false" ng-disabled="!detail.enableButton"><i class="icon wb-plus" aria-hidden="true"></i> {{'addressesView.actionsButton' | translate}}</button>
+              <div class="dropdown-menu animate dropdown-menu-right" aria-labelledby="newAddressDropdown" role="menu">
+                <a class="dropdown-item" href="#" ng-click="newAddress()" role="menuitem"><i class="icon fa-globe" aria-hidden="true"></i> {{'addressesView.newAddressButton' | translate}}</a>
+                <a class="dropdown-item" href="#" ng-show="detail.sapling && detail.showPrivateAddress" ng-click="newPrivateAddress(true)" role="menuitem"><i class="icon fa-shield" aria-hidden="true"></i> {{'addressesView.newPrivateAddressButton' | translate}}</a>
+                <a class="dropdown-item" href="#" ng-show="!detail.sapling && detail.showPrivateAddress" ng-click="newPrivateAddress()" role="menuitem"><i class="icon fa-shield" aria-hidden="true"></i> {{'addressesView.newPrivateAddressButton' | translate}}</a>
+                <a ng-class="!detail.showGetPrivKey ? 'disabled dropdown-item' : 'dropdown-item'" href="#" ng-click="!detail.showGetPrivKey ? '' : hideAddressClick()"><i class="icon wb-eye-close" aria-hidden="true"></i> {{detail.hideAddressText}}</a>
+                <a class="dropdown-item" href="#" role="menuitem" ng-click="showAddressClick()"><i class="icon wb-eye" aria-hidden="true"></i> {{'addressesView.showAllAddressesButton' | translate}}</a>
+                <a ng-class="!detail.showGetPrivKey ? 'disabled dropdown-item' : 'dropdown-item'" ng-show="detail.shield" href="#" ng-click="!detail.showGetPrivKey ? '' : multipleShieldClick()"><i class="icon wb-random" aria-hidden="true"></i> {{'addressesView.shieldCoinButton' | translate}}</a>
+                <a class="dropdown-item" href="#" ng-click="exportToFile()"><i class="icon wb-upload" aria-hidden="true"></i> {{'addressesView.exportToFile' | translate}}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="example row row-lg">
+        <div class="col-12">
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <input class="form-control" placeholder="{{'addressesView.placeholder.main' | translate}}" autocomplete="off" ng-model="searchText"/>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="table" style="overflow: auto">
+              <thead>
+                <tr>
+                  <th style="width: 3%;">
+                    <span class="checkbox-custom checkbox-primary">
+                      <input class="selectable-item" type="checkbox" ng-model="detail.selectedAll" ng-change="selectAllClick(detail.selectedAll)">
+                      <label></label>
+                    </span>
+                  </th>
+                  <!-- <th style="width: 4%;"></th> -->
+                  <th style="width: 3%;">{{'addressesView.table.qr' | translate}}</th>
+                  <th style="width: 10%;">{{'addressesView.table.type' | translate}}</th>
+                  <th style="width: 15%;">{{'addressesView.table.amount' | translate}}</th>
+                  <th style="width: 5%;">{{'addressesView.table.book' | translate}}</th>
+                  <th style="width: 60%;">{{'addressesView.table.address' | translate}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="addr in addresses | filter:searchText" ng-model="addr.key">
+                  <td>
+                    <span class="checkbox-custom checkbox-primary">
+                      <input class="selectable-item" type="checkbox" id="{{'row-' + addr.no}}" ng-model="selectedList[addr.address]" ng-change="select(addr.address, selectedList[addr.address])">
+                      <label></label>
+                    </span>
+                  </td>
+                  <!-- <td>{{addr.no}}</td> -->
+                  <td class="align-middle">
+                    <button type="button" class="btn btn-pure btn-default fas fa-qrcode" ng-click="viewQrcode(addr.address)" style="padding: 0px;"></button>
+                  </td>
+                  <td>
+                    <span ng-class="addr.type == 'private' ? 'badge badge-dark' : addr.type.includes('read-only') ?
+                    'badge badge-warning' : 'badge badge-success'">{{addr.type === 'private' ? ('addressesView.table.privateType' | translate) : ('addressesView.table.publicType' | translate)}}</span>
+                  </td>
+                  <td class="blue-grey-700 font-weight-200">{{addr.amount}}</td>
+                  <td> {{addr.book.split(' ')[0]}}
+                    <!-- <button type="button" class="btn btn-pure btn-default fas fa-address-book-o" ng-click="viewBook(addr.address, addr.book)" ng-show="addr.book != undefined ? true : false" style="padding: 0px;"></i> -->
+                  </td>
+                  <td style="font-size: 12px;">{{addr.address}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

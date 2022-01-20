@@ -1,0 +1,140 @@
+<div class="page-content">
+  <!-- Modal -->
+  <div class="modal fade" id="modalNewAddressBook" data-backdrop="static" data-keyboard="false"  aria-hidden="false" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-simple modal-center">
+      <form class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+          <h4 class="modal-title">{{detail.title}}</h4>
+        </div>
+        <div class="modal-body">
+          <div class="col-md-12">
+            <div class="form-horizontal">
+              <div class="form-group row">
+                <label class="col-md-2 form-control-label">{{'addressesView.table.name' | translate}}</label>
+                <div class="col-md-10">
+                  <input class="form-control" name="name" autocomplete="off" type="text" ng-model="detail.current.name" ng-disabled="detail.current.readonly">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-md-2 form-control-label">{{'addressesView.table.address' | translate}}</label>
+                <div class="col-md-10">
+                  <input class="form-control" name="name" autocomplete="off" type="text" ng-model="detail.current.address"ng-disabled="detail.current.readonly">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" data-dismiss="modal" class="btn btn-primary" ng-click="createAction(detail.current.name, detail.current.address)" ng-show="!detail.current.readonly">{{'global.apply' | translate}}</button>
+          <button type="button" data-dismiss="modal" class="btn btn-default btn-outline">{{detail.current.readonly == true ? ('global.close' | translate) : ('global.cancel' | translate)}}</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- End Modal -->
+
+  <!-- Modal -->
+  <div class="modal fade" id="modalEditAddressBook" data-backdrop="static" data-keyboard="false"  aria-hidden="false" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-simple modal-center">
+      <form class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+          <h4 class="modal-title">{{detail.title}}</h4>
+        </div>
+        <div class="modal-body">
+          <div class="table-responsive" style="max-height:330px;">
+            <table class="table" style="overflow: auto">
+              <thead>
+                <tr>
+                  <th style="width: 8%;"></th>
+                  <th style="width: 30%;">{{'addressesView.table.name' | translate}}</th>
+                  <th style="width: 62%;max-width: 62%;">{{'addressesView.table.address' | translate}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="b in detail.bookKeys">
+                  <td class="align-middle">
+                    <button type="button" class="btn btn-pure btn-default icon wb-minus-circle" ng-click="deleteBook(detail.book[b], b)" style="padding: 0 0 0 10px;"></button>
+                  </td>
+                  <td><input class="form-control" style="width: 100px;" name="name" autocomplete="off" type="text" ng-model="detail.book[b]" ng-change="bookChange(detail.book[b], b)"></td>
+                  <td class="align-middle" style="width: 62%;max-width: 62%;">{{b}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" data-dismiss="modal" class="btn btn-primary" ng-click="editAddressBookAction()">{{'global.apply' | translate}}</button>
+          <button type="button" data-dismiss="modal" class="btn btn-default btn-outline" ng-click="cancelAddressBookAction()">{{'global.cancel' | translate}}</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- End Modal -->
+
+  <!-- Modal -->
+  <div class="modal fade" id="modalQrCodeBook" data-backdrop="static" data-keyboard="false"  aria-hidden="false" role="dialog" tabindex="-1" style="display: none;">
+    <div class="modal-dialog modal-simple modal-center">
+      <form class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+              <h5 class="modal-title">{{detail.title}}</h5>
+              <div class="col-md-12">
+                  <canvas class="align-middle" id="qrcodeBook"></canvas>
+              </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" data-dismiss="modal" class="btn btn-default btn-outline">{{'global.close' | translate}}</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- End Modal -->
+  <div class="panel">
+    <div class="panel-body container-fluid">
+      <div class="example row row-lg">
+        <div class="col-12 text-right">
+          <button type="button" class="btn btn-success" ng-click="newAddressBook()"><i class="icon wb-plus" aria-hidden="true"></i></i> {{'addressesView.newAddressBookButton' | translate}}</button>
+          <button type="button" class="btn btn-dark" ng-click="editAddressBook()"><i class="icon wb-edit" aria-hidden="true"></i></i> {{'addressesView.editAddressBookButton' | translate}}</button>
+        </div>
+      </div>
+      <div class="example row row-lg">
+        <div class="col-12">
+          <div class="form-row">
+          </div>
+          <div class="table-responsive">
+            <table class="table table-striped table-hover">
+              <thead>
+                <tr>
+                  <th>{{'addressesView.table.qr' | translate}}</th>
+                  <th>{{'addressesView.table.book' | translate}}</th>
+                  <th>{{'addressesView.table.address' | translate}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="b in detail.bookKeys">
+                  <td class="align-middle">
+                    <button type="button" class="btn btn-pure btn-default fas fa-qrcode" ng-click="viewQrcode(b)"></button>
+                  </td>
+                  <td><input class="form-control" style="min-width: 100px;" name="name" autocomplete="off" type="text" ng-model="detail.book[b]" ng-change="bookChange(detail.book[b], b)" readonly></td>
+                  <td style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" class="align-middle">{{b}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

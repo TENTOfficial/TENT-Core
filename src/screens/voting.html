@@ -1,0 +1,136 @@
+<div class="page-content">
+
+  <!-- Modal Alert-->
+  <div class="modal fade modal-danger" id="modalMasternodeVote" data-backdrop="static" aria-hidden="true" role="dialog" tabindex="-1">
+    <div class="modal-dialog modal-simple modal-center">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+          <h4 class="modal-title">{{'votingView.votingForProposal' | translate}} {{detail.proposal.Name}}</h4>
+        </div>
+        <div class="modal-body">
+          <h4 class="modal-title">{{'votingView.information' | translate}}</h4>
+          <p>{{'votingView.proposalLink' | translate}}: <a href="#" ng-click="openUrl(detail.proposal.URL)">{{detail.proposal.URL}}</a></p>
+          <table class="text-center" style="width: 100%; margin-top: 25px; margin-bottom: 10px;">
+            <tr>
+              <td><a href="#" ng-click="votingResult(detail.proposal.Hash, true)" data-dismiss="modal"><i class="icon fa-thumbs-o-up green-500" aria-hidden="true" style="font-size: 50px;"></i></a></td>
+              <td><a href="#" ng-click="votingResult(detail.proposal.Hash, false)" data-dismiss="modal"><i class="icon fa-thumbs-o-down red-700" aria-hidden="true" style="font-size: 50px;"></i></a></td>
+            </tr>
+            <tr>
+              <td class="green-500" style="color: #11c26d; margin-top 20px; font-size: 15px; font-weight: bold;">{{'global.yes' | translate}}</td>
+              <td class="red-700" style="color: #ff4c52; margin-top 20px; font-size: 15px; font-weight: bold;">{{'global.no' | translate}}</td>
+            </tr>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">{{'global.close' | translate}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Modal -->
+  
+  <!-- Modal -->
+  <div class="modal fade modal-success" id="votingResult" data-backdrop="static" data-keyboard="false" aria-hidden="false" role="dialog">
+    <div class="modal-dialog modal-simple modal-center">
+      <form class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+          <h4 class="modal-title">{{'votingView.successVoted' | translate}} - {{detail.proposal.Name}}</h4>
+        </div>
+        <div class="modal-body">
+          <h4 class="modal-title">{{'votingView.results' | translate}}</h4>
+          <div class="row">
+            <div class="col-xl-12 form-group">
+              <textarea class="form-control font-size-12" rows="8" ng-model="detail.votingResult" readonly></textarea>
+            </div>
+          </div>
+          <div class="row">
+            <div class="text-center" style="width: 100%; margin-top: 25px;">
+              <div class="green-500" style="font-size: 40px;"><i class="icon fa-check-circle" aria-hidden="true"></i> {{'votingView.thankYou' | translate}}</div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-default" data-dismiss="modal" type="button"> {{'global.close' | translate}}</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- End Modal -->
+
+  <!-- Panel Voting Page -->
+  <div class="panel" id="exampleReport">
+    <div class="panel-body">
+      <div class="example-wrap">
+        <div class="example">
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <input class="form-control" placeholder="{{'votingView.placeholder' | translate}}" autocomplete="off" ng-model="searchText"/>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-hover" data-role="content">
+              <thead class="bg-blue-grey-100">
+                <tr>
+                  <th>
+                    #
+                  </th>
+                  <th>
+                    {{'votingView.proposal' | translate}}
+                  </th>
+                  <th>
+                    {{'votingView.description' | translate}}
+                  </th>
+                  <th>
+                      {{'votingView.blockStart' | translate}}
+                  </th>
+                  <th>
+                      {{'votingView.blockEnd' | translate}}
+                  </th>
+                  <th>
+                    {{'global.yes' | translate}}
+                  </th>
+                  <th>
+                    {{'global.no' | translate}}
+                  </th>
+                  <th>
+                    {{'votingView.vote' | translate}}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="m in detail.mnbudgetVote | filter:searchText">
+                  <td>
+                    <!-- {{m.name}} -->
+                  </td>
+                  <td><a ng-href="{{m.URL}}">{{m.URL}}</a>
+                    <i class="icon fa-external-link red-600" aria-hidden="true" data-toggle="tooltip" data-original-title="help" data-container="body" title=""></i>
+                  </td>
+                  <td>{{m.Name}}</td>
+                  <td>{{m.BlockStart}}</td>
+                  <td>{{m.BlockEnd}}</td>
+                  <td>
+                    <i class="icon fa-thumbs-o-up" aria-hidden="true"><span class="ml-5 green-500">{{m.Yeas}}</span></i>
+                  </td>
+                  <td>
+                    <i class="icon fa-thumbs-o-down" aria-hidden="true"><span class="ml-5 red-700">{{m.Nays}}</span></i>
+                  </td>
+                  <td>
+                    <button class="btn btn-xs btn-danger" data-toggle="modal" data-original-title="vote" data-container="body" type="button" ng-click="votingAction(m)"><i class="icon fa-gavel" aria-hidden="true"></i>{{'votingView.vote' | translate}}</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Voting Page-->
+</div>
+</div>

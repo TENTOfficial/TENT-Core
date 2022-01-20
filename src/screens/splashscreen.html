@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html class="no-js css-menubar" lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description" content="bootstrap admin template">
+    <meta name="author" content="">
+
+    <title>TENT Core</title>
+
+    <link rel="apple-touch-icon" href="../../assets/images/apple-touch-icon.png">
+    <link rel="shortcut icon" href="../../assets/images/favicon.ico">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../../global/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../global/css/bootstrap-extend.min.css">
+    <link rel="stylesheet" href="../../assets/css/site.min.css">
+
+    <link href="../../assets/skins/tent.css" rel="stylesheet" type="text/css">
+
+    <!-- Plugins -->
+    <link rel="stylesheet" href="../../global/vendor/animsition/animsition.css">
+    <link rel="stylesheet" href="../../global/vendor/asscrollable/asScrollable.css">
+    <link rel="stylesheet" href="../../global/vendor/switchery/switchery.css">
+    <link rel="stylesheet" href="../../global/vendor/intro-js/introjs.css">
+    <link rel="stylesheet" href="../../global/vendor/slidepanel/slidePanel.css">
+    <link rel="stylesheet" href="../../global/vendor/flag-icon-css/flag-icon.css">
+    <link rel="stylesheet" href="../../global/vendor/aspieprogress/asPieProgress.css">
+    <link rel="stylesheet" href="../../assets/examples/css/dashboard/v2.css">
+
+    <link rel="stylesheet" href="../../node_modules/angular/angular-csp.css">
+    <!-- Fonts -->
+    <link rel="stylesheet" href="../../global/fonts/web-icons/web-icons.min.css">
+    <link rel="stylesheet" href="../../global/fonts/font-awesome/font-awesome.css">
+    <link rel="stylesheet" href="../../global/fonts/brand-icons/brand-icons.min.css">
+    <!-- <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'> -->
+    <link rel="stylesheet" href="../../global/fonts/mfglabs/mfglabs.css">
+    <link rel="stylesheet" href="../../global/fonts/themify/themify.css">
+
+    <!-- <link rel="stylesheet" href="../../global/vendor/jquery-wizard/jquery-wizard.css">
+    <link rel="stylesheet" href="../../global/vendor/formvalidation/formValidation.css"> -->
+    <link rel="stylesheet" href="../../assets/examples/css/uikit/dropdowns.css">
+
+    <link rel="stylesheet" href="../../global/vendor/nprogress/nprogress.css">
+    <link rel="stylesheet" href="../../assets/examples/css/advanced/animation.css">
+    <link rel="stylesheet" href="../../assets/examples/css/uikit/progress-bars.css">
+    <link href="../../assets/skins/tent.css" rel="stylesheet" type="text/css">
+
+    <style>
+      /* width */
+      ::-webkit-scrollbar {
+        width: 7px;
+        height: 10px;
+      }
+
+      /* Track */
+      ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+      }
+
+     /* Handle */
+      ::-webkit-scrollbar-thumb {
+        background: #888;
+      }
+
+      /* Handle on hover */
+      ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+      }
+
+      body {
+          height: 100%;
+          padding: 0px;
+          margin: 0px;
+      }
+      .modal-body p {
+        word-wrap: break-word;
+      }
+
+      .modal-body{
+        white-space: wrap;
+        overflow-y: auto;
+        overflow-x: auto;
+      }
+
+      .noselect {
+        -webkit-touch-callout: none; /* iOS Safari */
+          -webkit-user-select: none; /* Safari */
+          -khtml-user-select: none; /* Konqueror HTML */
+            -moz-user-select: none; /* Firefox */
+              -ms-user-select: none; /* Internet Explorer/Edge */
+                  user-select: none; /* Non-prefixed version, currently
+                                        supported by Chrome and Opera */
+      }
+
+      #qrcode{
+        margin: auto;
+        display: block;
+      }
+
+      input[type=number]::-webkit-inner-spin-button,
+      input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        margin: 0;
+      }
+
+      .center {
+        text-align: center;
+      }
+    </style>
+
+
+    <!-- Scripts -->
+    <script src="../../global/vendor/breakpoints/breakpoints.js"></script>
+    <script>
+      Breakpoints();
+    </script>
+    <script src="../../node_modules/particles.js/particles.js"></script>
+    <script src="../../assets/js/ParticlesApp.js"></script>
+
+  </head>
+
+  <body style="overflow: hidden" ng-app="splashscreen" ng-controller="SplashCtrl">
+    <div id="particles-js">
+      <header id="titlebar-load">
+        <div id="drag-region">
+          <div id="window-title">
+            <span>TENT Core</span>
+          </div>
+          <div id="window-controls">
+            <div class="button" id="switch-coin-button" ng-hide="detail.hideSwitchCoin" title="Switch Coins">
+              <span><i class="fa fa-exchange" style="margin-bottom: 4px;"></i></span>
+            </div>
+            <div class="button" id="minimize-button">
+              <span>&#xE921;</span>
+            </div>
+            <div class="button" id="min-max-button">
+              <span>&#xE922;</span>
+            </div>
+            <div class="button" id="restore-button">
+              <span>&#xE923;</span>
+            </div>
+            <div class="button" id="close-button">
+              <span>&#xE8BB;</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Modal Alert-->
+      <div class="modal fade" id="modalMenuBarAlert" data-backdrop="static" aria-hidden="true" aria-labelledby="modalMenuBarAlert"
+      role="dialog" tabindex="-1">
+        <div class="modal-dialog modal-simple modal-center">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+              <h4 class="modal-title">{{'global.alert' | translate}}!!!</h4>
+            </div>
+            <div class="modal-body">
+              <p>{{'loadingView.loadingWallet' | translate}}</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">{{'global.close' | translate}}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Modal -->
+
+      <!-- Modal Alert-->
+      <div class="modal fade" id="modalLoadingAlert" data-backdrop="static" aria-hidden="true" aria-labelledby="modalLoadingAlert"
+      role="dialog" tabindex="-1">
+        <div class="modal-dialog modal-simple modal-center">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+              <h4 class="modal-title">{{detail.title}}</h4>
+            </div>
+            <div class="modal-body">
+              <p>{{detail.text}}</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="restartAction()">{{'global.close' | translate}}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Modal -->
+
+      <!-- Modal Alert-->
+      <div class="modal fade" id="modalLoadingDaemon" data-backdrop="static" aria-hidden="true"
+      role="dialog" tabindex="-1">
+        <div class="modal-dialog modal-simple modal-center">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+              <h4 class="modal-title">{{detail.title}}</h4>
+            </div>
+            <div class="modal-body">
+                <textarea class="form-control" rows="7" ng-model="detail.text" readonly></textarea>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-success" ng-hide="!detail.reindex" data-dismiss="modal" ng-click="reindexAction()">{{'settingsView.reindexWlt' | translate}}</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="daemonAction()">{{'global.close' | translate}}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Modal -->
+
+      <!-- Modal Popup-->
+      <div class="modal fade" id="modalPopup" data-backdrop="static" aria-hidden="true"
+      role="dialog" tabindex="-1">
+        <div class="modal-dialog modal-simple modal-center">
+          <div class="modal-content" style="position: relative;">
+            <a ng-href="{{detail.popup.redirectUrl}}" data-dismiss="modal" ng-click="closePopup()">
+              <img class="img-responsive" ng-src="{{detail.popup.imgUrl}}" style="max-width:600px;">
+            </a>
+            <button type="button" class="fas fa-window-close" data-dismiss="modal" aria-label="Close" ng-click="closePopup()" style="position: absolute; right: 0px;"></button>
+          </div>
+        </div>
+      </div>
+      <!-- End Modal -->
+
+      <!-- Modal Alert-->
+      <div class="modal fade" id="modalDependencies" aria-hidden="true" aria-labelledby="modalDependencies" data-backdrop="static" data-keyboard="false" role="dialog" tabindex="-1">
+        <div class="modal-dialog modal-simple modal-center">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+              <h4 class="modal-title">{{detail.title}}</h4>
+            </div>
+            <div class="modal-body">
+              <p>{{detail.text}}</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" ng-click="dependenciesAction()" data-dismiss="modal">{{'global.close' | translate}}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Modal -->
+
+      <!-- Modal -->
+      <div class="modal fade" id="modalLoadingNewVersion" aria-hidden="false" aria-labelledby="modalLoadingNewVersionLabel" data-backdrop="static" data-keyboard="false" role="dialog" tabindex="-1">
+        <div class="modal-dialog modal-simple modal-center">
+          <form class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+              <h4 class="modal-title" id="modalLoadingNewVersionLabel">{{detail.title}}</h4>
+            </div>
+            <div class="modal-body">
+                <textarea class="form-control" rows="7" ng-model="detail.text" readonly></textarea>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-success" data-dismiss="modal" data-toggle="modal" type="button" ng-click="btnAction()">{{detail.btnText}}</button>
+              <button class="btn btn-default" data-dismiss="modal" data-toggle="modal" type="button" ng-click="cancelAction()">{{'global.cancel' | translate}}</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- End Modal -->
+
+      <!-- Modal -->
+      <div class="modal fade" id="modalUbuntuVersion" aria-hidden="false" aria-labelledby="modalUbuntuVersion" role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-simple modal-center">
+          <form class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">{{detail.title}}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label class="form-control-label" for="inputUserNameOne">{{'loadingView.selectLinuxVer' | translate}}</label>
+                    <select class="form-control" data-plugin="select2" ng-model="detail.linuxVersion">
+                        <option ng-repeat="os in oss">{{ os }}</option>
+                    </select>
+                    <p class="text-danger" ng-hide="detail.noiticeSelectUbuntu" for="inputUserNameOne">* {{'loadingView.selectOneVer' | translate}}</p>
+                  </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+              <div class="col-md-12 float-right">
+                <button class="btn btn-primary" type="button" data-dismiss="modal" ng-click="selectLinux(detail.linuxVersion)">{{detail.btnText}}</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- End Modal -->
+
+      <!-- Modal -->
+      <div class="modal fade" id="selectCoinAlert" aria-hidden="false" aria-labelledby="modalUbuntuVersion" role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
+          <div class="modal-dialog modal-simple modal-center">
+            <form class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">{{detail.title}}</h4>
+              </div>
+              <div class="modal-body">
+                  <div class="col-md-12 center">
+                    <span ng-repeat="coin in detail.coins">
+                      <button class="btn btn-lg text-center" data-dismiss="modal" ng-style="{'background-color': coin.name == detail.currentCoin ? 'powderblue' : 'transparent'}" ng-click="selectCoin(coin.name)"><img width="32" ng-src="{{coin.icon}}"><br><small>{{coin.name}}</small></button>
+                    </span>
+                  </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!-- End Modal -->
+
+
+      <!-- Modal -->
+      <div class="modal fade" id="selectCoinAlertSettings" aria-hidden="false" aria-labelledby="modalUbuntuVersion" role="dialog" tabindex="-1">
+          <div class="modal-dialog modal-simple modal-center">
+            <form class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">{{detail.title}}</h4>
+              </div>
+              <div class="modal-body">
+                  <div class="col-md-12 center">
+                    <span ng-repeat="coin in detail.coins">
+                      <button class="btn btn-lg text-center" data-dismiss="modal" ng-style="{'background-color': coin.name == detail.currentCoin ? 'powderblue' : 'transparent'}" ng-click="selectCoinSettings(coin.name)"><img width="32" ng-src="{{coin.icon}}"><br><small>{{coin.name}}</small></button>
+                    </span>
+                  </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!-- End Modal -->
+
+        <!-- Modal -->
+      <div class="modal fade" id="autoDownloadDaemonModal" aria-hidden="false" role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-simple modal-center">
+          <form class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">{{detail.title}}</h4>
+            </div>
+            <div class="modal-body">
+              <p>{{detail.text}}</p>
+              <div class="col-md-12 center">
+                <button class="btn btn-success text-center" data-dismiss="modal" ng-click="autoDownload(true)">{{'global.yesRecommended' | translate}}</button>
+                <button class="btn text-center" data-dismiss="modal" ng-click="autoDownload(false)">{{'global.no' | translate}}</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- End Modal -->
+
+      <!-- Modal -->
+      <div class="modal fade" id="customDataDir" aria-hidden="false" role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-simple modal-center">
+          <form class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">{{detail.title}}</h4>
+            </div>
+            <div class="modal-body">
+              <p>{{detail.text}}</p>
+              <div class="col-md-12 center">
+                <button class="btn btn-success text-center" data-dismiss="modal" ng-click="customData(false)">{{'global.yes' | translate}}</button>
+                <button class="btn text-center" data-dismiss="modal" ng-click="customData(true)">{{'global.no' | translate}}</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- End Modal -->
+
+      <!-- Modal -->
+      <div class="modal fade" id="masternodeOption" aria-hidden="false" role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
+          <div class="modal-dialog modal-simple modal-center">
+            <form class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">{{detail.title}}</h4>
+              </div>
+              <div class="modal-body">
+                <p>{{detail.text}}</p>
+                <div class="col-md-12 center">
+                  <button class="btn text-center" data-dismiss="modal" ng-click="indexData()">{{'global.yes' | translate}}</button>
+                  <button class="btn text-center" data-dismiss="modal" ng-click="noindexData()">{{'global.no' | translate}}</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!-- End Modal -->
+
+      <!-- Modal -->
+      <div class="modal fade" id="autoDownloadBlockchainModal" aria-hidden="false" role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-simple modal-center">
+          <form class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">{{detail.title}}</h4>
+            </div>
+            <div class="modal-body">
+              <p>{{detail.text}}</p>
+              <div class="col-md-12 center">
+                <button class="btn btn-success text-center" data-dismiss="modal" ng-click="autoDownloadBlockchain(true)">{{'global.yesRecommended' | translate}}</button>
+                <button class="btn text-center" data-dismiss="modal" ng-click="autoDownloadBlockchain(false)">{{'global.no' | translate}}</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- End Modal -->
+
+      <!-- Modal -->
+      <div class="modal fade" id="modalDaemonLocation" aria-hidden="false" role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-simple modal-center">
+          <form class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title" id="importPrivatekeysLabel">{{detail.title}}</h4>
+            </div>
+            <div class="modal-body">
+              <div class="col-md-12">
+                  <div class="form-group row">
+                    <div class="col-md-4">
+                      <button class="btn btn-default btn-block" type="button" ng-click="openDaemon()" ng-disabled="detail.disableSelectDaemon">{{'loadingView.selectDaemon' | translate}}</button>
+                    </div>
+                    <div class="col-md-8">
+                      <input class="form-control" id="daemon-file" name="name" autocomplete="off" type="text" ng-model="detail.daemonLocation" readonly>
+                    </div>
+                  </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" data-dismiss="modal" data-backdrop="static" class="btn btn-success" ng-click="applyLocationAction()" ng-disabled="detail.disableSelectDaemon">{{'global.continue' | translate}}</button>
+              <button type="button" data-dismiss="modal" data-backdrop="static" class="btn btn-primary" ng-click="cancelLocationAction()">{{'global.back' | translate}}</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- End Modal -->
+
+      <!-- Modal -->
+      <div class="modal fade" id="modalDataLocation" aria-hidden="false" role="dialog" tabindex="-1" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-simple modal-center">
+          <form class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title" id="importPrivatekeysLabel">{{detail.title}}</h4>
+            </div>
+            <div class="modal-body">
+              <div class="col-md-12">
+                  <div class="form-group row">
+                    <div class="col-md-4">
+                      <button class="btn btn-default btn-block" type="button" ng-click="openDataDir()" ng-disabled="detail.disableSelectDirectory">{{'loadingView.selectDir' | translate}}</button>
+                    </div>
+                    <div class="col-md-8">
+                      <input class="form-control" id="data-dir" name="name" autocomplete="off" type="text" ng-model="detail.dataLocation" readonly>
+                    </div>
+                  </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" data-dismiss="modal" data-backdrop="static" class="btn btn-success" ng-click="applyCustomDataAction()" ng-disabled="detail.disableSelectDirectory">{{'global.continue' | translate}}</button>
+              <button type="button" data-dismiss="modal" data-backdrop="static" class="btn btn-primary" ng-click="canceCustomDataAction()">{{'global.back' | translate}}</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- End Modal -->
+
+      <div class="text-center particles-splash" data-animsition-in="fade-in" data-animsition-out="fade-out">
+        <div class="loader vertical-align-middle loader-grill"></div>
+        <h4 class="white loadingsplash" ng-hide="detail.hidedata">{{detail.currentprocess}}<span>.</span><span>.</span><span>.</span></h4>
+        <div class="progress vertical-align-middle" ng-style="{'width': detail.progressbarWidth + 'px', 'margin': '0px'}" ng-hide="detail.disableProgressbar">
+          <div class="progress-bar progress-bar-success progress-bar-striped active" title="{{detail.width}}" aria-valuenow="{{detail.progress}}" aria-valuemin="0"
+            aria-valuemax="100" ng-style="{'width': detail.width}" role="progressbar">
+          </div>
+        </div>
+        <h5 class="white" ng-hide="detail.hidedata">{{detail.appversion}}</h5>
+      </div>
+    </div>
+    <div style="position: fixed; bottom: 10px; right: 10px;" ng-hide="detail.hideSwitchCoin">
+      <button type="button" class="btn btn-primary" style="border: none; background: none;" ng-click="debuggingAction()"><i class="fa fa-cogs" style="font-size: 20px; color: #ffffff;"></i></button>
+    </div>
+
+
+    <!-- Core  -->
+    <script src="../../global/vendor/babel-external-helpers/babel-external-helpers.js"></script>
+    <script src="../../global/vendor/jquery/jquery.js"></script>
+    <script src="../../node_modules/angular/angular.min.js"></script>
+    <script src="../../node_modules/angular-translate/dist/angular-translate.min.js"></script>
+    <script src="../splashscreen.js"></script>
+    <script src="../../global/vendor/popper-js/umd/popper.min.js"></script>
+    <script src="../../global/vendor/bootstrap/bootstrap.js"></script>
+    <script src="../../global/vendor/animsition/animsition.js"></script>
+    <script src="../../global/vendor/mousewheel/jquery.mousewheel.js"></script>
+    <script src="../../global/vendor/asscrollbar/jquery-asScrollbar.js"></script>
+    <script src="../../global/vendor/asscrollable/jquery-asScrollable.js"></script>
+    <script src="../../global/vendor/ashoverscroll/jquery-asHoverScroll.js"></script>
+
+    <!-- Plugins -->
+    <script src="../../global/vendor/switchery/switchery.js"></script>
+    <script src="../../global/vendor/intro-js/intro.js"></script>
+    <script src="../../global/vendor/screenfull/screenfull.js"></script>
+    <script src="../../global/vendor/slidepanel/jquery-slidePanel.js"></script>
+    <script src="../../global/vendor/matchheight/jquery.matchHeight-min.js"></script>
+    <script src="../../global/vendor/jquery-selective/jquery-selective.min.js"></script>
+
+    <!-- Scripts -->
+    <script src="../../global/js/Component.js"></script>
+    <script src="../../global/js/Plugin.js"></script>
+    <script src="../../global/js/Base.js"></script>
+    <script src="../../global/js/Config.js"></script>
+
+    <script src="../../assets/js/Section/Menubar.js"></script>
+    <script src="../../assets/js/Section/GridMenu.js"></script>
+    <script src="../../assets/js/Section/Sidebar.js"></script>
+    <script src="../../assets/js/Section/PageAside.js"></script>
+    <script src="../../assets/js/Plugin/menu.js"></script>
+
+    <script src="../../global/js/config/colors.js"></script>
+    <script src="../../assets/js/config/tour.js"></script>
+    <script>Config.set('assets', '../../assets');</script>
+
+    <!-- Page -->
+    <script src="../../assets/js/Site.js"></script>
+    <script src="../../global/js/Plugin/asscrollable.js"></script>
+    <script src="../../global/js/Plugin/slidepanel.js"></script>
+    <script src="../../global/js/Plugin/switchery.js"></script>
+    <script src="../../global/js/Plugin/gmaps.js"></script>
+    <script src="../../global/js/Plugin/matchheight.js"></script>
+    <script src="../../global/js/Plugin/asscrollable.js"></script>
+
+    <script src="../../global/vendor/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js"></script>
+
+    <script src="../../global/vendor/jquery-appear/jquery.appear.js"></script>
+    <script src="../../global/vendor/nprogress/nprogress.js"></script>
+
+    <script src="../../global/js/Plugin/jquery-appear.js"></script>
+    <script src="../../global/js/Plugin/nprogress.js"></script>
+
+    <script src="../../assets/examples/js/advanced/animation.js"></script>
+
+    <script src="../../global/vendor/asprogress/jquery-asProgress.js"></script>
+    <script src="../../global/js/Plugin/asprogress.js"></script>
+    <script src="../../assets/examples/js/uikit/progress-bars.js"></script>
+  </body>
+
+</html>
